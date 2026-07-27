@@ -1,0 +1,25 @@
+random_seed=42
+M=16
+K=4
+N_DATA_SYMBOLS=7
+HIDDEN_DIM=128
+TRAIN_EBNO_MIN_DB=4.0
+TRAIN_EBNO_MAX_DB=8.0
+EVAL_EBNO_DB=[-4.0, -3.5, -3.0, -2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0]
+NUM_TRAINING_ITERATIONS=10000
+TRAINING_BATCH_SIZE=256
+LEARNING_RATE=0.001
+EVALUATION_BATCH_SIZE=512
+MAX_MC_ITER=1000
+NUM_TARGET_BIT_ERRORS=2000
+NUM_TARGET_BLOCK_ERRORS=1000
+ZF_EPSILON=1e-06
+COMPARISON_CODERATE=0.5714285714285714
+BER comparison excludes pilot overhead from Eb/N0-to-N0 conversion.
+device=cpu
+
+Configuration summary:
+perfect_csi: label=Perfect CSI, pilots=0, perfect_csi=True, ber_coderate=0.57142857, actual_effective_rate=0.57142857, payload_efficiency=1.00000000
+pilot_2: label=2 pilots, pilots=2, perfect_csi=False, ber_coderate=0.57142857, actual_effective_rate=0.44444444, payload_efficiency=0.77777778
+pilot_4: label=4 pilots, pilots=4, perfect_csi=False, ber_coderate=0.57142857, actual_effective_rate=0.36363636, payload_efficiency=0.63636364
+pilot_8: label=8 pilots, pilots=8, perfect_csi=False, ber_coderate=0.57142857, actual_effective_rate=0.26666667, payload_efficiency=0.46666667
