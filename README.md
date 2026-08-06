@@ -7,3 +7,4 @@ This repository contains some experiments on deep-learning-based end-to-end tran
 - `NvLabsMapping`: Implementation and experiments based on NVIDIA's mapping-based neural transceiver approach.
 - `OneHotCompact`: A compact one-hot end-to-end autoencoder baseline for jointly learning the transmitter and receiver.
 - `OnehotPilotComparison`: Experiments comparing one-hot neural transceivers with different pilot-assisted channel estimation settings.
+- `SnrComparison`: Experiments comparing trainable constellation models trained over different uniformly sampled Eb/N0 ranges.
