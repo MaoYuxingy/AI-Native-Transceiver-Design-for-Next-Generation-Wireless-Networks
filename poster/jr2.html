@@ -14,10 +14,11 @@
 </div>
 
 <div class="key">
-  <p>A learned transceiver beats a matched classical receiver by <b>0.37&nbsp;dB</b> on AWGN,
-  gains <b>nothing</b> once the channel fades and CSI is estimated &mdash; and can be trained
-  <span class="hi">with no channel model at all</span> for a measured
-  <span class="hi">0.12&ndash;0.15&nbsp;dB</span>.</p>
+  <p>We measure two things: how much end-to-end learning is really worth in a transceiver, and
+  what it costs to train one without a model of the channel. The learned system gains
+  <b>0.37&nbsp;dB</b> over a classical receiver on AWGN and <b>nothing at all</b> under Rayleigh
+  fading with estimated CSI. Training it with no channel model costs a further
+  <span class="hi">0.12 to 0.15&nbsp;dB</span>.</p>
 </div>
 
 <div class="body">
@@ -26,30 +27,34 @@
 
   <section>
     <h2><span class="n">1</span>Background</h2>
-    <p>A conventional transceiver is a chain of separately designed blocks &mdash; each optimal
-    alone, jointly only as good as the assumptions linking them. Deep learning replaces the chain
-    with an <b>autoencoder</b> [1], or estimation and detection with a <b>learned receiver</b> [2].
-    Two objections stand in the way:</p>
+    <p>A conventional transceiver is built as a chain of blocks, each designed on its own. The
+    chain performs well, but only as well as the assumptions that link one block to the next. Deep
+    learning suggests two ways around this: replace the whole chain with an <b>autoencoder</b> [1],
+    or replace channel estimation and detection with a <b>learned receiver</b> [2].</p>
+    <p>Two objections are usually raised, and both are fair:</p>
     <ul>
-      <li>Training needs a <b>differentiable channel model</b>. A deployed channel is a black box.</li>
-      <li>Most reported gains are measured on <b>AWGN</b>, where the classical receiver is already
-      optimal &mdash; so the comparison flatters the learned system.</li>
+      <li>Training needs a <b>differentiable model of the channel</b>. A real channel is a black
+      box, so this cannot be done on deployed hardware.</li>
+      <li>Most published gains are measured on <b>AWGN</b>, where the classical receiver is already
+      optimal. A gain measured there may not survive on a realistic channel.</li>
     </ul>
-    <p>This work answers both by measurement rather than by argument.</p>
+    <p>We address both by measurement.</p>
   </section>
 
   <section>
     <h2><span class="n">2</span>Objectives and Contributions</h2>
     <ul>
-      <li>Measure the gain of a learned transceiver against a <b>matched</b> classical baseline, on
+      <li>Measure what a learned transceiver gains over a <b>matched</b> classical baseline, on
       AWGN and on Rayleigh block fading with <b>pilot-estimated CSI</b>.</li>
-      <li>Train the transmitter with <b>no channel model at all</b>, and price what that costs.</li>
-      <li>Charge for everything: the transmitter never sees the channel, pilots cost rate
-      <span class="q">R(L&minus;P)/L</span>, and estimation error enters as
-      <span class="q">N<sub>0</sub>(1+1/P)/|h&#770;|&sup2;</span> &mdash; omitting that last factor
+      <li>Train the transmitter with <b>no channel model at all</b>, using reinforcement learning
+      in place of backpropagation through the channel, and measure what this costs.</li>
+      <li>Account for everything the learned system uses. The transmitter never sees the channel.
+      Pilots are charged against the code rate as <span class="q">R(L&minus;P)/L</span>, and
+      estimation error enters the effective noise as
+      <span class="q">N<sub>0</sub>(1+1/P)/|h&#770;|&sup2;</span>. Leaving out that last factor
       understates the noise by <span class="hi">1.76&nbsp;dB</span> at P&nbsp;=&nbsp;2.</li>
-      <li>Diagnose failures <b>by intervention</b>: hold the weights fixed, change one thing, and
-      see which change removes the symptom.</li>
+      <li>Explain each failure by <b>intervention</b>: hold the weights fixed, change one thing,
+      and see which change removes the symptom.</li>
     </ul>
   </section>
 
@@ -57,9 +62,9 @@
     <h2><span class="n">3</span>System Model</h2>
     <figure>
       __SYSFIG__
-      <figcaption><b>Fig. 1</b> &mdash; Only the two shaded blocks differ between the systems
-      compared. The rate-1/2 5G LDPC code, the channel call and the random seeds are shared, so any
-      difference in bit error rate is attributable to the mapper and demapper alone.</figcaption>
+      <figcaption><b>Fig. 1</b> &mdash; The two systems differ only in the shaded blocks. They
+      share the rate-1/2 5G LDPC code, the channel model and the random seeds, so any difference
+      in bit error rate comes from the mapper and the demapper.</figcaption>
     </figure>
   </section>
 
@@ -68,14 +73,21 @@
     <figure>
       <img src="__IMG_AWGN__" alt="Left: bit error rate against Eb/N0 on AWGN; the learned system sits 0.39 dB left of classical 64-QAM at BER 1e-3. Right: the 64-QAM lattice with an arrow from each point to its learned position.">
       <figcaption><b>Fig. 2</b> &mdash; The learned system against 64-QAM with Gray labelling and
-      APP demapping, on the same channel realisations.</figcaption>
+      APP demapping, on identical channel realisations.</figcaption>
     </figure>
-    <ul style="margin-top:4mm">
-      <li>Under AWGN, APP demapping is <b>already optimal</b>, so the receiver cannot be the source
-      of the gain.</li>
-      <li>All of it comes from the transmitter: the learned constellation pulls off the rigid
-      lattice, spending more power on the symbols that were most <b>confusable</b>.</li>
-    </ul>
+    <p style="margin-top:4mm">Under AWGN the APP demapper is already optimal, so the receiver
+    cannot account for the gain. It comes from the transmitter instead. The learned constellation
+    moves off the regular lattice and gives more power to the symbols that were easiest to
+    confuse.</p>
   </section>
+
+  <div class="refs">
+    <h3>References</h3>
+    <div><span class="lbl">[1]</span> T. O&rsquo;Shea and J. Hoydis, &ldquo;An Introduction to Deep Learning for the Physical Layer,&rdquo; arXiv:1702.00832, 2017.</div>
+    <div><span class="lbl">[2]</span> H. Ye, G. Y. Li and B.-H. F. Juang, &ldquo;Power of Deep Learning for Channel Estimation and Signal Detection in OFDM,&rdquo; arXiv:1708.08514, 2017.</div>
+    <div><span class="lbl">[3]</span> S. Smeka J. et al., &ldquo;Accelerating Meta-Learning with the Enhanced Reptile Algorithm for Rapid Adaptation in Neural Networks,&rdquo; SCSE, IEEE, 2025.</div>
+    <div><span class="lbl">[4]</span> N. C. Luong et al., &ldquo;Applications of Deep Reinforcement Learning in Communications and Networking: A Survey,&rdquo; IEEE Commun. Surveys Tuts., vol. 21, no. 4, 2019.</div>
+    <div><span class="lbl">[5]</span> NVIDIA Sionna, autoencoder tutorial notebook, which this work extends.</div>
+  </div>
 
 </div>

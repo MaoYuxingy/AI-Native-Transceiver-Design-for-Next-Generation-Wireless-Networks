@@ -13,7 +13,7 @@
 html,body{width:594mm;height:841mm;background:var(--paper);color:var(--ink);
   font-family:var(--serif);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .sheet{width:594mm;height:841mm;display:flex;flex-direction:column;
-  padding:17mm 18mm 0;overflow:hidden}
+  padding:17mm 18mm 13mm;overflow:hidden}
 
 /* ---------- masthead ---------- */
 .head{display:flex;gap:13mm;align-items:flex-start}
@@ -29,8 +29,8 @@ html,body{width:594mm;height:841mm;background:var(--paper);color:var(--ink);
   color:var(--soft);white-space:nowrap}
 
 /* ---------- the finding, stated once, before any detail ---------- */
-.key{margin-top:8mm;border-top:1.1mm solid var(--rule-hard);
-  border-bottom:0.3mm solid var(--rule);padding:5.5mm 0 5.5mm}
+.key{margin-top:7mm;border-top:1.1mm solid var(--rule-hard);
+  border-bottom:0.3mm solid var(--rule);padding:4.6mm 0 4.6mm}
 .key p{font-size:24pt;line-height:1.30}
 .key b{font-weight:700}
 .key .hi{color:var(--brick);font-weight:700}
@@ -41,8 +41,8 @@ html,body{width:594mm;height:841mm;background:var(--paper);color:var(--ink);
 .col{min-width:0}
 .col.l{border-right:0.3mm solid var(--rule);padding-right:13mm}
 
-section{font-size:19.5pt;line-height:1.37}
-section + section{margin-top:6.5mm;padding-top:6mm;border-top:0.3mm solid var(--rule)}
+section{font-size:19pt;line-height:1.35}
+section + section{margin-top:5.5mm;padding-top:5.2mm;border-top:0.3mm solid var(--rule)}
 section h2{font-size:23pt;font-weight:700;line-height:1.15;margin-bottom:3.4mm;
   letter-spacing:.01em}
 section h2 .n{color:var(--navy);margin-right:3mm;font-variant-numeric:lining-nums}
@@ -58,7 +58,7 @@ b,strong{font-weight:700}
 .q{font-family:var(--mono);font-size:0.92em}
 
 /* ---------- figures and table ---------- */
-figure{margin:4mm 0 0}
+figure{margin:3mm 0 0}
 figure img,figure svg{display:block;width:100%;height:auto}
 figcaption{font-size:15.5pt;line-height:1.28;color:var(--soft);margin-top:2.4mm}
 figcaption b{color:var(--ink)}
@@ -77,9 +77,12 @@ td.num{font-variant-numeric:lining-nums tabular-nums}
 tr.best td{font-weight:700}
 
 /* ---------- references ---------- */
-.refs{margin-top:auto;border-top:0.3mm solid var(--rule);padding:4mm 0 6mm;
-  font-size:12.5pt;line-height:1.32;color:var(--soft);
-  display:grid;grid-template-columns:1fr 1fr;column-gap:13mm}
-.refs div{break-inside:avoid}
+/* They live at the foot of the left column, which runs shorter than the right. That
+   is the space they belong in, rather than a strip across the foot of the sheet. */
+.refs{margin-top:6.5mm;padding-top:6mm;border-top:0.3mm solid var(--rule)}
+.refs h3{font-size:19pt;font-weight:700;margin-bottom:2.8mm;letter-spacing:.01em}
+.refs div{font-size:13.5pt;line-height:1.3;color:var(--soft);margin-bottom:1.8mm;
+  padding-left:7mm;text-indent:-7mm}
+.refs div:last-child{margin-bottom:0}
 .refs .lbl{color:var(--ink);font-weight:700}
 </style>
