@@ -22,6 +22,12 @@ html,body{width:594mm;height:841mm;background:#fff;color:var(--ink);
 .head h1{font-size:46pt;font-weight:700;line-height:1.09;letter-spacing:-.005em}
 .head .auth{font-size:24pt;margin-top:5mm;color:#D6E4F0}
 .head .aff{font-size:19pt;margin-top:2.5mm;color:#A9C3DC}
+/* Links to the repository. Dark-on-white, not reversed out of the navy: scanners
+   are unreliable on inverted symbols, so the code keeps its own white tile. */
+.head .qr{flex:none;width:34mm;align-self:center;text-align:center}
+.head .qr svg{display:block;width:34mm;height:34mm}
+.head .qr span{display:block;font-size:12pt;line-height:1.18;margin-top:1.8mm;
+  color:#A9C3DC;white-space:nowrap}
 
 /* ---------- body grid ---------- */
 .body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12mm;
