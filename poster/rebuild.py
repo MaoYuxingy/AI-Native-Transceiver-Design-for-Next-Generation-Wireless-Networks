@@ -1,7 +1,6 @@
 """Rebuild a poster PDF from the current figures, in one command.
 
-    python rebuild.py            # journal design  -> poster_A1_v4.pdf
-    python rebuild.py card       # card design     -> poster_A1_v3.pdf
+    python rebuild.py            # -> poster_A1_v3.pdf
 
 Run this after re-running the notebook, so the poster picks up the regenerated
 figures. It inlines everything, drives headless Chrome, and then checks the result
@@ -15,7 +14,6 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, os.pardir))
 
 DESIGNS = {
-    'journal': ('build_jr.py', 'poster_v4.html', 'poster_A1_v4.pdf'),
     'card': ('build_pn.py', 'poster_v2.html', 'poster_A1_v3.pdf'),
 }
 
@@ -47,7 +45,7 @@ def page_count(pdf):
 
 
 def main():
-    which = (sys.argv[1] if len(sys.argv) > 1 else 'journal').lower()
+    which = (sys.argv[1] if len(sys.argv) > 1 else 'card').lower()
     if which not in DESIGNS:
         sys.exit('Unknown design %r. Choose from: %s' % (which, ', '.join(DESIGNS)))
     builder, html, pdf_name = DESIGNS[which]

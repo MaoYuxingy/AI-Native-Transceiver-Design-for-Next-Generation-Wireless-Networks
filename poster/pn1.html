@@ -32,22 +32,22 @@ html,body{width:594mm;height:841mm;background:#fff;color:var(--ink);
 /* ---------- body grid ---------- */
 .body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12mm;
   padding:5mm 16mm 0;align-content:start;counter-reset:card}
-.col{display:flex;flex-direction:column;gap:6mm}
+.col{display:flex;flex-direction:column;gap:5mm}
 
 /* ---------- card ---------- */
 .card{border:1.1mm solid var(--navy);border-radius:3mm;overflow:hidden;background:#fff;
   display:flex;flex-direction:column}
-.card > h2{background:var(--navy);color:#fff;font-size:30pt;font-weight:400;
-  padding:2.8mm 6mm 3.1mm;line-height:1.1}
+.card > h2{background:var(--navy);color:#fff;font-size:27pt;font-weight:400;
+  padding:2.3mm 5.5mm 2.5mm;line-height:1.1}
 /* Left column numbers 1-4, right column 5-8, following DOM order. */
 .card > h2::before{counter-increment:card;content:counter(card);
   color:var(--bar);font-weight:700;margin-right:3.4mm}
-.card .in{padding:4.4mm 6mm 4.4mm;font-size:20pt;line-height:1.34}
+.card .in{padding:3.6mm 5.5mm 3.6mm;font-size:19pt;line-height:1.32}
 .card p{margin-bottom:2.9mm}
 .card p:last-child{margin-bottom:0}
 .card ul{list-style:none;margin-bottom:3.2mm}
 .card ul:last-child{margin-bottom:0}
-.card li{position:relative;padding-left:6.4mm;margin-bottom:2.5mm}
+.card li{position:relative;padding-left:6mm;margin-bottom:2.2mm}
 .card li:last-child{margin-bottom:0}
 .card li::before{content:"\2022";position:absolute;left:0;top:-0.4mm;
   font-size:24pt;line-height:1;color:var(--ink)}
@@ -61,9 +61,26 @@ figure{margin:3mm auto 0;width:90%}
 figure img{display:block;width:100%;height:auto}
 figcaption{font-size:16pt;color:#3d4a57;margin-top:2mm;line-height:1.3}
 
+/* ---------- table ---------- */
+table{width:100%;border-collapse:collapse;font-size:17pt;margin-top:1mm;
+  font-variant-numeric:lining-nums tabular-nums}
+caption{caption-side:top;text-align:left;font-size:15.5pt;color:#3d4a57;
+  padding-bottom:2mm;line-height:1.28}
+caption b{color:var(--ink)}
+th,td{padding:1.7mm 2mm;text-align:right;border-bottom:0.25mm solid #C9D2DC}
+th:first-child,td:first-child{text-align:left;padding-left:0}
+thead th{border-bottom:0.6mm solid var(--navy);font-weight:700}
+tbody tr:last-child td{border-bottom:0.6mm solid var(--navy)}
+tr.best td{font-weight:700}
+
 /* ---------- references + footer bar ---------- */
-.refs{padding:2.5mm 16mm 2mm;font-size:12pt;line-height:1.3;color:#222;
-  display:grid;grid-template-columns:1fr 1fr;column-gap:12mm;row-gap:0.6mm}
-.refs div{break-inside:avoid}
+/* A plain block at the foot of the left column, where the spare space was. It carries
+   no title bar of its own: the reference list is apparatus, not a ninth finding. */
+.refs{padding:1mm 1mm 0}
+.refs h3{font-size:21pt;font-weight:700;color:var(--navy);margin-bottom:2.4mm}
+.refs .reflist{font-size:13pt;line-height:1.3;color:#333}
+.refs .reflist div{padding-left:7mm;text-indent:-7mm;margin-bottom:1.7mm;break-inside:avoid}
+.refs .reflist div:last-child{margin-bottom:0}
+.refs .lbl{color:var(--ink);font-weight:700}
 .foot{height:7mm;background:linear-gradient(90deg,var(--navy) 0%,var(--bar) 100%)}
 </style>

@@ -1,7 +1,6 @@
 import base64, io, os
 SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)
-imgs = {'__IMG_GLOBAL__': 'global_comparison_poster.png',
-        '__IMG_AWGN__': 'awgn_ae_vs_qam_poster.png',
+imgs = {'__IMG_AWGN__': 'awgn_ae_vs_qam_poster.png',
         '__IMG_RL__': 'rl_vs_gradient_awgn.png',
         '__LOGO__': 'uol_logo_white.png'}
 css = io.open('pn1.html', encoding='utf-8').read()
