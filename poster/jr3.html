@@ -1,0 +1,97 @@
+<div class="col r">
+
+  <section>
+    <h2><span class="n">5</span>Learning Without a Channel Model</h2>
+    <p>Every result so far was trained by backpropagating <b>through</b> a differentiable channel;
+    a deployed transmitter has none. Here the receiver trains normally &mdash; its gradient never
+    crosses the channel &mdash; while the transmitter perturbs its own symbols and updates from
+    <b>one scalar per codeword</b> returned by the receiver [4]. The channel is <b>sampled, never
+    differentiated</b>.</p>
+    <figure>
+      <img src="__IMG_RL__" alt="Left: three bit error rate curves on AWGN; the reinforcement-learned system lies between the gradient-trained one and classical 64-QAM. Right: the two learned constellations with a line joining the two positions of each symbol, which nearly coincide.">
+      <figcaption><b>Fig. 3</b> &mdash; Reinforcement learning replaces the channel gradient at the
+      transmitter. Lines in the right panel join the two positions of each symbol.</figcaption>
+    </figure>
+    <ul style="margin-top:4mm">
+      <li><b>Price of dispensing with the channel model:</b>
+      <span class="hi">+0.12 / +0.15 / +0.12&nbsp;dB</span> at BER 1e&minus;2 / 1e&minus;3 / 1e&minus;4.</li>
+      <li>It still beats classical 64-QAM by <span class="hi">0.24&nbsp;dB</span>, with no channel
+      model anywhere in training.</li>
+      <li>Both methods put the same symbol in nearly the same place, so reinforcement learning
+      recovers the gradient solution rather than a different one.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span>Both Channels, Both Receivers</h2>
+    <table>
+      <caption><b>Table 1</b> &mdash; E<sub>b</sub>/N<sub>0</sub> required to reach a given bit
+      error rate (dB, lower is better). 64,000 codewords per point; every entry rests on at least
+      30 block errors.</caption>
+      <thead>
+        <tr><th>System</th><th>1e&minus;2</th><th>1e&minus;3</th><th>1e&minus;4</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>AWGN, classical 64-QAM + APP</td><td class="num">5.67</td><td class="num">6.17</td><td class="num">6.54</td></tr>
+        <tr class="best"><td>AWGN, learned (channel gradient)</td><td class="num">5.30</td><td class="num">5.78</td><td class="num">6.18</td></tr>
+        <tr><td>AWGN, learned (RL, no channel model)</td><td class="num">5.42</td><td class="num">5.92</td><td class="num">6.31</td></tr>
+        <tr><td>Rayleigh, classical 64-QAM + APP</td><td class="num">11.26</td><td class="num">13.30</td><td class="num">14.79</td></tr>
+        <tr><td>Rayleigh, learned</td><td class="num">11.25</td><td class="num">13.19</td><td class="num">14.94</td></tr>
+      </tbody>
+    </table>
+    <ul style="margin-top:4mm">
+      <li>Fading costs <span class="hi">5.9&ndash;8.8&nbsp;dB</span>. The choice of receiver moves
+      things by under <b>0.4&nbsp;dB</b> &mdash; an order of magnitude less.</li>
+      <li>On Rayleigh with estimated CSI the learned system shows <b>no measurable gain</b>
+      (+0.01 / +0.11 / &minus;0.15&nbsp;dB). The 1e&minus;4 entry <b>changed sign</b> between two
+      runs of the same systems, so it is noise, not a difference.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="n">7</span>Why AWGN Weights Fail on Fading</h2>
+    <p>Reused on a fading channel without retraining, the AWGN weights give a BER curve that
+    <b>rises</b> with SNR &mdash; non-physical, so something is wrong. Holding every weight fixed
+    and changing one thing at a time isolates which:</p>
+    <ul>
+      <li>Clamping the network's <b>outputs</b>: under 4% change &mdash; the rise remains.</li>
+      <li>Erasing deep-fade symbols: <b>worse</b> above 10&nbsp;dB.</li>
+      <li>Clamping the noise level <b>reported to the demapper</b> back into its training range:
+      <span class="hi">the curve becomes physical</span>, with no weight changed.</li>
+    </ul>
+    <p style="margin-top:3mm">So the fault is on the <b>input</b> side, and in the <b>quiet</b>
+    tail rather than the deep-fade one: at 18&nbsp;dB, <span class="hi">89%</span> of symbols carry
+    an effective noise <i>lower</i> than anything seen in training, against 4.6% in deep fades.
+    Retraining restores a monotonic curve &mdash; 1e&minus;3 at 13.2&nbsp;dB, 1e&minus;4 at
+    14.9&nbsp;dB.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">8</span>Conclusion and Next Steps</h2>
+    <p>Accuracy is <b>not</b> the case for an AI-native transceiver: the gain is real but small on
+    AWGN and absent under fading. The case is that the design <b>needs no channel model</b> &mdash;
+    and that now carries a measured price rather than an assumption.</p>
+    <ul>
+      <li><b>RQ1 &mdash; no channel model. <span class="hi">Answered.</span></b> 0.12&ndash;0.15 dB
+      against gradient training, still 0.24 dB ahead of the classical receiver.</li>
+      <li><b>RQ2 &mdash; fast adaptation.</b> Remaining work. Meta-learning [3] targets exactly the
+      distribution shift measured in &sect;7 &mdash; motivation <b>measured here, not cited</b>.</li>
+    </ul>
+    <p style="font-size:15.5pt;line-height:1.28;color:var(--soft);margin-top:3.4mm">Points resting
+    on fewer than 30 block errors are dropped rather than drawn. Seeds fixed throughout; every
+    number is measured in the accompanying notebook. Sionna [5] and PyTorch.
+    <b>Scope:</b> flat block fading only &mdash; no multipath, Doppler or OFDM.</p>
+  </section>
+
+</div>
+</div>
+
+<div class="refs">
+  <div><span class="lbl">[1]</span> T. O&rsquo;Shea and J. Hoydis, &ldquo;An Introduction to Deep Learning for the Physical Layer,&rdquo; arXiv:1702.00832, 2017.</div>
+  <div><span class="lbl">[2]</span> H. Ye, G. Y. Li and B.-H. F. Juang, &ldquo;Power of Deep Learning for Channel Estimation and Signal Detection in OFDM,&rdquo; arXiv:1708.08514, 2017.</div>
+  <div><span class="lbl">[3]</span> S. Smeka J. et al., &ldquo;Accelerating Meta-Learning with the Enhanced Reptile Algorithm,&rdquo; SCSE, IEEE, 2025.</div>
+  <div><span class="lbl">[4]</span> N. C. Luong et al., &ldquo;Applications of Deep Reinforcement Learning in Communications and Networking,&rdquo; IEEE Commun. Surveys Tuts., 21(4), 2019.</div>
+  <div><span class="lbl">[5]</span> NVIDIA Sionna, autoencoder tutorial notebook &mdash; the starting point this work extends.</div>
+</div>
+
+</div>
