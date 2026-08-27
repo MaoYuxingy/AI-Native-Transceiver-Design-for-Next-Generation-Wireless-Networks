@@ -70,7 +70,10 @@ th,td{padding:1.9mm 2mm;text-align:right;border-bottom:0.25mm solid var(--rule)}
 th:first-child,td:first-child{text-align:left;padding-left:0}
 thead th{border-bottom:0.6mm solid var(--rule-hard);font-weight:700}
 tbody tr:last-child td{border-bottom:0.6mm solid var(--rule-hard)}
-td.num{font-variant-numeric:tabular-nums}
+/* Constantia defaults to old-style figures, which are right in running text and
+   wrong in a column of numbers that has to be compared down the page. */
+table{font-variant-numeric:lining-nums tabular-nums}
+td.num{font-variant-numeric:lining-nums tabular-nums}
 tr.best td{font-weight:700}
 
 /* ---------- references ---------- */
