@@ -74,10 +74,15 @@
     assumption: <span class="hi">0.12&ndash;0.15&nbsp;dB</span> against training through the channel
     gradient, while still finishing <span class="hi">0.24&nbsp;dB</span> ahead of the classical
     receiver.</p>
-    <p>The same measurements say where the difficulty actually lies. The demapper fails when the
-    <b>distribution of its input</b> shifts (&sect;7), not when the channel gets harder &mdash; so
-    keeping a deployed receiver working is a question about distribution shift, which is what
-    meta-learning [3] addresses. That motivation is <b>measured here, not cited</b>.</p>
+    <ul>
+      <li><b>RQ1 &mdash; training without a channel model.</b> <span class="hi">Answered.</span>
+      The transmitter learns from one scalar per codeword, and the channel is never
+      differentiated.</li>
+      <li><b>RQ2 &mdash; fast adaptation.</b> The measurements say where the difficulty lies: the
+      demapper fails on <b>distribution shift</b> (&sect;7), not on a harder channel. Adaptation is
+      therefore a distribution-shift problem, which is what meta-learning [3] addresses &mdash; a
+      motivation <b>measured here, not cited</b>.</li>
+    </ul>
     <p style="font-size:15.5pt;line-height:1.28;color:var(--soft);margin-top:3.4mm">Points resting
     on fewer than 30 block errors are dropped rather than drawn. Seeds fixed throughout; every
     number is measured in the accompanying notebook. Sionna [5] and PyTorch.
