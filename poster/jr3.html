@@ -67,16 +67,17 @@
   </section>
 
   <section>
-    <h2><span class="n">8</span>Conclusion and Next Steps</h2>
+    <h2><span class="n">8</span>Conclusion</h2>
     <p>Accuracy is <b>not</b> the case for an AI-native transceiver: the gain is real but small on
-    AWGN and absent under fading. The case is that the design <b>needs no channel model</b> &mdash;
-    and that now carries a measured price rather than an assumption.</p>
-    <ul>
-      <li><b>RQ1 &mdash; no channel model. <span class="hi">Answered.</span></b> 0.12&ndash;0.15 dB
-      against gradient training, still 0.24 dB ahead of the classical receiver.</li>
-      <li><b>RQ2 &mdash; fast adaptation.</b> Remaining work. Meta-learning [3] targets exactly the
-      distribution shift measured in &sect;7 &mdash; motivation <b>measured here, not cited</b>.</li>
-    </ul>
+    AWGN, and absent once the channel fades and CSI is estimated. The case is that the design
+    <b>needs no channel model</b> &mdash; and that now carries a measured price rather than an
+    assumption: <span class="hi">0.12&ndash;0.15&nbsp;dB</span> against training through the channel
+    gradient, while still finishing <span class="hi">0.24&nbsp;dB</span> ahead of the classical
+    receiver.</p>
+    <p>The same measurements say where the difficulty actually lies. The demapper fails when the
+    <b>distribution of its input</b> shifts (&sect;7), not when the channel gets harder &mdash; so
+    keeping a deployed receiver working is a question about distribution shift, which is what
+    meta-learning [3] addresses. That motivation is <b>measured here, not cited</b>.</p>
     <p style="font-size:15.5pt;line-height:1.28;color:var(--soft);margin-top:3.4mm">Points resting
     on fewer than 30 block errors are dropped rather than drawn. Seeds fixed throughout; every
     number is measured in the accompanying notebook. Sionna [5] and PyTorch.
