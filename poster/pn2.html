@@ -1,0 +1,78 @@
+<div class="sheet">
+
+<div class="head">
+  <img class="mark" src="__LOGO__" alt="University of Liverpool">
+  <div class="bar"></div>
+  <div class="txt">
+    <h1>AI-Native Transceiver Design for Next-Generation Wireless Networks</h1>
+    <p class="auth">Yuxing Mao and Haikun Xu &nbsp;&nbsp;|&nbsp;&nbsp; Supervisor: Dr Huynh Nguyen</p>
+    <p class="aff">Trustworthy Computing, School of Computer Science and Informatics &nbsp;&middot;&nbsp; LivSURF 436026</p>
+  </div>
+</div>
+
+<div class="body">
+
+<div class="col">
+
+  <div class="card">
+    <h2>Background and Motivation</h2>
+    <div class="in">
+      <p>A conventional transceiver is a chain of separately designed blocks &mdash; each optimal
+      alone, jointly only as good as the assumptions linking them. Deep learning replaces the chain
+      with an <b>autoencoder</b> [1], or estimation and detection with a
+      <b>learned receiver</b> [2].</p>
+      <ul>
+        <li>Training needs a <span class="r">differentiable channel model</span> &mdash; a real
+        channel is a black box.</li>
+        <li>Most reported gains are on <span class="r">AWGN</span> alone, where the classical
+        receiver is already optimal.</li>
+      </ul>
+      <p>Two questions follow, settled here by measurement: <b>how much is end-to-end learning
+      worth</b> against a classical receiver doing its best, and <b>can it be trained without a
+      channel model at all?</b></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Objectives and Contributions</h2>
+    <div class="in">
+      <ul>
+        <li>Measure the gain of a learned transceiver against a <b>matched</b> classical baseline,
+        on AWGN and on Rayleigh block fading with <b>pilot-estimated CSI</b>.</li>
+        <li>Train the transmitter with <b>no channel model at all</b> &mdash; reinforcement learning
+        in place of backpropagation through the channel &mdash; and measure what that costs.</li>
+        <li>Keep it honest: the transmitter <b>never sees the channel</b>; pilots are charged for
+        (rate <span class="n">R(L&minus;P)/L</span>) and so is estimation error
+        (<span class="n">N<sub>0</sub>(1+1/P)/|<i>h&#770;</i>|&sup2;</span>) &mdash; omitting that
+        factor understates the noise by <span class="r">1.76 dB</span> at P = 2.</li>
+        <li>Diagnose <b>by intervention, not by argument</b>, why AWGN-trained weights fail on a
+        fading channel.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>System Model</h2>
+    <div class="in">
+      __SYSFIG__
+      <p style="margin-top:3.4mm">Only the two shaded blocks differ. The LDPC code, the channel
+      call and the seeds are <b>shared</b>, so any BER difference is down to the mapper and
+      demapper alone.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Where the AWGN Gain Comes From</h2>
+    <div class="in">
+      <figure><img src="__IMG_AWGN__" alt="Left: AWGN BER waterfall, the learned system ahead of 64-QAM by 0.39 dB at BER 1e-3. Right: constellation plot with arrows from each 64-QAM point to its learned position."></figure>
+      <ul style="margin-top:4mm">
+        <li>Under AWGN, APP demapping is <b>already optimal</b> &mdash; the receiver cannot be the
+        source of the gain.</li>
+        <li>All of it comes from moving the transmitted points: the learned constellation pulls
+        off the rigid lattice, spending more power on the most
+        <span class="r">confusable</span> symbols.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>

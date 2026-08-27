@@ -1,0 +1,43 @@
+<svg viewBox="0 0 255 120" style="width:100%;height:auto" role="img"
+     aria-label="Signal chain: LDPC encoder, mapper, channel, demapper, LDPC decoder. The mapper and demapper differ between the learned and classical systems; everything else is shared.">
+  <defs><marker id="a2" markerWidth="6" markerHeight="6" refX="5" refY="2.4" orient="auto">
+    <path d="M0,0 L5.4,2.4 L0,4.8 Z" fill="#111"/></marker></defs>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle" fill="#111">
+
+    <g stroke="#111" stroke-width="0.9" marker-end="url(#a2)">
+      <line x1="46.5" y1="28" x2="53" y2="28"/>
+      <line x1="98.5" y1="28" x2="105" y2="28"/>
+      <line x1="141.5" y1="28" x2="148" y2="28"/>
+      <line x1="200.5" y1="28" x2="207" y2="28"/>
+    </g>
+
+    <rect x="2.5" y="10" width="44" height="36" rx="2.4" fill="#EDF2F8" stroke="#17375E" stroke-width="1"/>
+    <text x="24.5" y="25" font-size="7">LDPC</text><text x="24.5" y="36" font-size="7">encoder</text>
+
+    <rect x="53" y="10" width="45.5" height="36" rx="2.4" fill="#CFE0F0" stroke="#17375E" stroke-width="1.7"/>
+    <text x="75.7" y="31" font-size="8" font-weight="bold" fill="#17375E">Mapper</text>
+
+    <rect x="105" y="10" width="36.5" height="36" rx="2.4" fill="#fff" stroke="#111" stroke-width="0.9" stroke-dasharray="3 2"/>
+    <text x="123.2" y="31" font-size="7.5">Channel</text>
+
+    <rect x="148" y="10" width="52.5" height="36" rx="2.4" fill="#CFE0F0" stroke="#17375E" stroke-width="1.7"/>
+    <text x="174.2" y="31" font-size="8" font-weight="bold" fill="#17375E">Demapper</text>
+
+    <rect x="207" y="10" width="45.5" height="36" rx="2.4" fill="#EDF2F8" stroke="#17375E" stroke-width="1"/>
+    <text x="229.7" y="25" font-size="7">LDPC</text><text x="229.7" y="36" font-size="7">decoder</text>
+
+    <line x1="2.5" y1="57" x2="252.5" y2="57" stroke="#17375E" stroke-width="0.7"/>
+
+    <text x="2.5" y="72" font-size="7" font-weight="bold" fill="#17375E" text-anchor="start">Learned</text>
+    <text x="75.7" y="72" font-size="7">trainable constellation</text>
+    <text x="174.2" y="72" font-size="7">neural network</text>
+
+    <text x="2.5" y="87" font-size="7" font-weight="bold" fill="#555" text-anchor="start">Classical</text>
+    <text x="75.7" y="87" font-size="7">64-QAM, Gray</text>
+    <text x="174.2" y="87" font-size="7">APP demapper</text>
+
+    <line x1="2.5" y1="96" x2="252.5" y2="96" stroke="#17375E" stroke-width="0.7"/>
+    <text x="2.5" y="110" font-size="6.6" fill="#333" text-anchor="start">Channel:</text>
+    <text x="34" y="110" font-size="6.6" fill="#333" text-anchor="start">AWGN &#160;&#160;|&#160;&#160; Rayleigh block fading, L = 25, P pilot symbols, LS estimate</text>
+  </g>
+</svg>

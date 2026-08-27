@@ -1,0 +1,698 @@
+Full run log archived from Autoencoder_YuxingMao.ipynb
+Run: execution_count 1-41, a single clean Run All.
+Sampling: batch_size=128, num_target_block_errors=300, max_mc_iter=100
+          -> 12,800 blocks/point budget (the exploratory setting).
+This run used the CORRECTED no_eff (Section 5, 1 + 1/P factor).
+The poster cells (Sections 8b and 12c) were NOT run at poster settings;
+cell util-poster-helpers was never executed in this run.
+Archived: 2026-08-20T22:42:34
+==============================================================================
+
+------------------------------------------------------------------------------
+CELL [17]  id=fd837bf0  exec=10
+  first line: device = sionna.phy.config.device
+------------------------------------------------------------------------------
+device = cpu
+
+------------------------------------------------------------------------------
+CELL [29]  id=477165a6  exec=18
+  first line: # Instantiate and train the end-to-end system
+------------------------------------------------------------------------------
+Iteration 9900/10000  BCE: 0.2837
+
+------------------------------------------------------------------------------
+CELL [31]  id=code-sec8b  exec=19
+  first line: # ============================================================
+------------------------------------------------------------------------------
+awgn_autoencoder_weights_conventional_training: restored 8/31 tensors (0 unexpected in file)
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      4.0 | 1.0927e-01 | 1.0000e+00 |       31470 |      288000 |          384 |         384 |         1.4 |reached target block errors
+     4.25 | 8.6472e-02 | 9.8177e-01 |       24904 |      288000 |          377 |         384 |         1.3 |reached target block errors
+      4.5 | 6.8194e-02 | 9.1667e-01 |       19640 |      288000 |          352 |         384 |         1.3 |reached target block errors
+     4.75 | 4.4354e-02 | 7.6758e-01 |       17032 |      384000 |          393 |         512 |         1.8 |reached target block errors
+      5.0 | 2.4194e-02 | 5.5469e-01 |       11613 |      480000 |          355 |         640 |         2.1 |reached target block errors
+     5.25 | 1.1824e-02 | 3.3594e-01 |        9081 |      768000 |          344 |        1024 |         3.4 |reached target block errors
+      5.5 | 3.9160e-03 | 1.4648e-01 |        6015 |     1536000 |          300 |        2048 |         6.9 |reached target block errors
+     5.75 | 9.7871e-04 | 5.1800e-02 |        4322 |     4416000 |          305 |        5888 |        20.1 |reached target block errors
+      6.0 | 2.5583e-04 | 1.7109e-02 |        2456 |     9600000 |          219 |       12800 |        44.1 |reached max iterations
+     6.25 | 4.5833e-05 | 3.6719e-03 |         440 |     9600000 |           47 |       12800 |        42.3 |reached max iterations
+      6.5 | 1.1146e-05 | 1.1719e-03 |         107 |     9600000 |           15 |       12800 |        43.5 |reached max iterations
+     6.75 | 1.3542e-06 | 3.1250e-04 |          13 |     9600000 |            4 |       12800 |        45.6 |reached max iterations
+      7.0 | 5.2083e-07 | 7.8125e-05 |           5 |     9600000 |            1 |       12800 |        43.3 |reached max iterations
+     7.25 | 4.1667e-07 | 7.8125e-05 |           4 |     9600000 |            1 |       12800 |        43.4 |reached max iterations
+      7.5 | 0.0000e+00 | 0.0000e+00 |           0 |     9600000 |            0 |       12800 |        47.5 |reached max iterations
+
+Simulation stopped as no error occurred @ EbNo = 7.5 dB.
+
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      4.0 | 1.2178e-01 | 1.0000e+00 |       35072 |      288000 |          384 |         384 |         1.6 |reached target block errors
+     4.25 | 1.0904e-01 | 1.0000e+00 |       31403 |      288000 |          384 |         384 |         1.6 |reached target block errors
+      4.5 | 9.6594e-02 | 1.0000e+00 |       27819 |      288000 |          384 |         384 |         1.6 |reached target block errors
+     4.75 | 8.0701e-02 | 9.7917e-01 |       23242 |      288000 |          376 |         384 |         1.6 |reached target block errors
+      5.0 | 5.6993e-02 | 8.9583e-01 |       16414 |      288000 |          344 |         384 |         1.6 |reached target block errors
+     5.25 | 3.6674e-02 | 7.7148e-01 |       14083 |      384000 |          395 |         512 |         2.2 |reached target block errors
+      5.5 | 1.8542e-02 | 5.1562e-01 |        8900 |      480000 |          330 |         640 |         2.7 |reached target block errors
+     5.75 | 8.0544e-03 | 2.7083e-01 |        6959 |      864000 |          312 |        1152 |         4.7 |reached target block errors
+      6.0 | 2.2674e-03 | 1.1347e-01 |        4571 |     2016000 |          305 |        2688 |        11.0 |reached target block errors
+     6.25 | 5.9196e-04 | 3.3705e-02 |        3978 |     6720000 |          302 |        8960 |        34.6 |reached target block errors
+      6.5 | 1.3656e-04 | 8.5938e-03 |        1311 |     9600000 |          110 |       12800 |        46.3 |reached max iterations
+     6.75 | 1.4583e-05 | 2.1094e-03 |         140 |     9600000 |           27 |       12800 |        47.1 |reached max iterations
+      7.0 | 8.7500e-06 | 8.5938e-04 |          84 |     9600000 |           11 |       12800 |        52.8 |reached max iterations
+     7.25 | 1.8750e-06 | 3.1250e-04 |          18 |     9600000 |            4 |       12800 |        53.4 |reached max iterations
+      7.5 | 1.5625e-06 | 1.5625e-04 |          15 |     9600000 |            2 |       12800 |        50.2 |reached max iterations
+
+================= AWGN: autoencoder vs 64-QAM =================
+BER 1e-02: autoencoder 5.29 dB | 64-QAM 5.69 dB | gain +0.40 dB
+BER 1e-03: autoencoder 5.75 dB | 64-QAM 6.15 dB | gain +0.41 dB
+<Figure size 1300x500 with 2 Axes>
+[inline figure: image/png]
+
+------------------------------------------------------------------------------
+CELL [33]  id=4baebb84  exec=20
+  first line: # 9a. LS accuracy check: error should be ~ theory no/P
+------------------------------------------------------------------------------
+P=2: MSE=0.05050   theory no/P=0.05000
+P=4: MSE=0.02643   theory no/P=0.02500
+P=6: MSE=0.01638   theory no/P=0.01667
+P=8: MSE=0.01268   theory no/P=0.01250
+
+------------------------------------------------------------------------------
+CELL [34]  id=code-sec9b  exec=21
+  first line: # ============================================================
+------------------------------------------------------------------------------
+  P | E[err/no_eff] | vs uncorrected | expected 1+1/P
+--------------------------------------------------------
+  2 |        0.9983 |         1.4974 |         1.5000
+  4 |        1.0013 |         1.2516 |         1.2500
+  8 |        0.9989 |         1.1238 |         1.1250
+
+perfect CSI (P=4): E[err/no_eff] = 0.9987   (must be 1.000 - no estimation error to charge for)
+
+Breakdown by fade depth (P=4), ratio must stay ~1.000 in every bin:
+  strong    |h|^2 > ~0.8     n= 111684  E[err/no_eff]=1.0047
+  moderate                   n=  88601  E[err/no_eff]=0.9978
+  deep      |h|^2 ~ 0.06-0.25 n=  40464  E[err/no_eff]=0.9895
+  very deep |h|^2 < ~0.06    n=  15251  E[err/no_eff]=0.9915
+
+------------------------------------------------------------------------------
+CELL [36]  id=6a744ef1  exec=22
+  first line: set_seed(42)
+------------------------------------------------------------------------------
+awgn_autoencoder_weights_conventional_training: restored 8/31 tensors (0 unexpected in file)
+b: torch.Size([64, 750]) b_hat: torch.Size([64, 750])
+raw BER: 0.044083334505558014
+
+------------------------------------------------------------------------------
+CELL [39]  id=64c65526  exec=23
+  first line: ebno_dbs_pilot = np.arange(8.0, 18.1, 1.0)   # block-fading + pilot: w
+------------------------------------------------------------------------------
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.5176e-01 | 9.0885e-01 |       43708 |      288000 |          349 |         384 |         1.3 |reached target block errors
+      9.0 | 1.0942e-01 | 7.8385e-01 |       31512 |      288000 |          301 |         384 |         1.3 |reached target block errors
+     10.0 | 8.2893e-02 | 6.3477e-01 |       31831 |      384000 |          325 |         512 |         1.7 |reached target block errors
+     11.0 | 5.7838e-02 | 4.9531e-01 |       27762 |      480000 |          317 |         640 |         2.1 |reached target block errors
+     12.0 | 3.9967e-02 | 3.7500e-01 |       26858 |      672000 |          336 |         896 |         3.2 |reached target block errors
+     13.0 | 3.4571e-02 | 3.3705e-01 |       23232 |      672000 |          302 |         896 |         3.1 |reached target block errors
+     14.0 | 3.1663e-02 | 3.1152e-01 |       24317 |      768000 |          319 |        1024 |         3.5 |reached target block errors
+     15.0 | 3.6260e-02 | 3.5714e-01 |       24367 |      672000 |          320 |         896 |         3.0 |reached target block errors
+     16.0 | 5.4271e-02 | 4.9844e-01 |       26050 |      480000 |          319 |         640 |         2.2 |reached target block errors
+     17.0 | 7.9958e-02 | 6.6797e-01 |       30704 |      384000 |          342 |         512 |         1.7 |reached target block errors
+     18.0 | 1.1011e-01 | 8.2031e-01 |       31712 |      288000 |          315 |         384 |         1.3 |reached target block errors
+--- P=2 done ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.4032e-01 | 8.9583e-01 |       40412 |      288000 |          344 |         384 |         1.3 |reached target block errors
+      9.0 | 1.0769e-01 | 7.8385e-01 |       31015 |      288000 |          301 |         384 |         1.3 |reached target block errors
+     10.0 | 7.5333e-02 | 5.9375e-01 |       28928 |      384000 |          304 |         512 |         1.7 |reached target block errors
+     11.0 | 5.3788e-02 | 4.5573e-01 |       30982 |      576000 |          350 |         768 |         2.5 |reached target block errors
+     12.0 | 4.1280e-02 | 4.0104e-01 |       23777 |      576000 |          308 |         768 |         2.6 |reached target block errors
+     13.0 | 3.1574e-02 | 2.9688e-01 |       24249 |      768000 |          304 |        1024 |         3.3 |reached target block errors
+     14.0 | 3.2126e-02 | 3.3817e-01 |       21589 |      672000 |          303 |         896 |         2.9 |reached target block errors
+     15.0 | 4.3637e-02 | 4.3620e-01 |       25135 |      576000 |          335 |         768 |         2.5 |reached target block errors
+     16.0 | 6.2356e-02 | 5.4531e-01 |       29931 |      480000 |          349 |         640 |         2.2 |reached target block errors
+     17.0 | 9.9816e-02 | 7.9167e-01 |       28747 |      288000 |          304 |         384 |         1.3 |reached target block errors
+     18.0 | 1.2649e-01 | 9.1146e-01 |       36428 |      288000 |          350 |         384 |         1.3 |reached target block errors
+--- P=4 done ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.5015e-01 | 9.1927e-01 |       43242 |      288000 |          353 |         384 |         1.3 |reached target block errors
+      9.0 | 1.1568e-01 | 8.2812e-01 |       33315 |      288000 |          318 |         384 |         1.3 |reached target block errors
+     10.0 | 7.8544e-02 | 6.5820e-01 |       30161 |      384000 |          337 |         512 |         1.8 |reached target block errors
+     11.0 | 5.4267e-02 | 4.7813e-01 |       26048 |      480000 |          306 |         640 |         2.2 |reached target block errors
+     12.0 | 4.4186e-02 | 4.0104e-01 |       25451 |      576000 |          308 |         768 |         2.7 |reached target block errors
+     13.0 | 3.1115e-02 | 3.2910e-01 |       23896 |      768000 |          337 |        1024 |         3.6 |reached target block errors
+     14.0 | 3.2048e-02 | 3.2422e-01 |       24613 |      768000 |          332 |        1024 |         3.6 |reached target block errors
+     15.0 | 4.4899e-02 | 4.3880e-01 |       25862 |      576000 |          337 |         768 |         2.7 |reached target block errors
+     16.0 | 6.3784e-02 | 5.8789e-01 |       24493 |      384000 |          301 |         512 |         1.9 |reached target block errors
+     17.0 | 9.1750e-02 | 7.6172e-01 |       35232 |      384000 |          390 |         512 |         1.8 |reached target block errors
+     18.0 | 1.2279e-01 | 8.9844e-01 |       35364 |      288000 |          345 |         384 |         1.3 |reached target block errors
+--- P=6 done ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.6843e-01 | 9.6354e-01 |       48509 |      288000 |          370 |         384 |         1.3 |reached target block errors
+      9.0 | 1.2077e-01 | 8.4896e-01 |       34781 |      288000 |          326 |         384 |         1.3 |reached target block errors
+     10.0 | 9.0023e-02 | 6.9922e-01 |       34569 |      384000 |          358 |         512 |         1.9 |reached target block errors
+     11.0 | 6.2865e-02 | 5.5000e-01 |       30175 |      480000 |          352 |         640 |         2.3 |reached target block errors
+     12.0 | 4.4406e-02 | 4.4401e-01 |       25578 |      576000 |          341 |         768 |         2.9 |reached target block errors
+     13.0 | 3.4182e-02 | 3.4263e-01 |       22970 |      672000 |          307 |         896 |         3.3 |reached target block errors
+     14.0 | 2.9729e-02 | 3.1348e-01 |       22832 |      768000 |          321 |        1024 |         3.7 |reached target block errors
+     15.0 | 3.8646e-02 | 4.0885e-01 |       22260 |      576000 |          314 |         768 |         2.9 |reached target block errors
+     16.0 | 5.6204e-02 | 5.5937e-01 |       26978 |      480000 |          358 |         640 |         2.4 |reached target block errors
+     17.0 | 8.1557e-02 | 6.9727e-01 |       31318 |      384000 |          357 |         512 |         1.9 |reached target block errors
+     18.0 | 1.1401e-01 | 8.9583e-01 |       32836 |      288000 |          344 |         384 |         1.4 |reached target block errors
+--- P=8 done ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.1290e-01 | 7.9948e-01 |       32516 |      288000 |          307 |         384 |         1.5 |reached target block errors
+      9.0 | 7.9677e-02 | 6.3477e-01 |       30596 |      384000 |          325 |         512 |         2.0 |reached target block errors
+     10.0 | 6.2229e-02 | 5.1875e-01 |       29870 |      480000 |          332 |         640 |         2.4 |reached target block errors
+     11.0 | 4.2080e-02 | 3.8170e-01 |       28278 |      672000 |          342 |         896 |         3.4 |reached target block errors
+     12.0 | 3.5286e-02 | 3.4375e-01 |       23712 |      672000 |          308 |         896 |         3.5 |reached target block errors
+     13.0 | 3.5426e-02 | 3.3817e-01 |       23806 |      672000 |          303 |         896 |         3.5 |reached target block errors
+     14.0 | 4.4066e-02 | 4.2708e-01 |       25382 |      576000 |          328 |         768 |         3.0 |reached target block errors
+     15.0 | 6.6740e-02 | 5.9570e-01 |       25628 |      384000 |          305 |         512 |         2.1 |reached target block errors
+     16.0 | 9.2125e-02 | 7.6172e-01 |       35376 |      384000 |          390 |         512 |         2.2 |reached target block errors
+     17.0 | 1.2603e-01 | 9.0625e-01 |       36296 |      288000 |          348 |         384 |         1.5 |reached target block errors
+     18.0 | 1.5112e-01 | 9.7917e-01 |       43522 |      288000 |          376 |         384 |         1.5 |reached target block errors
+
+------------------------------------------------------------------------------
+CELL [40]  id=986f9ed2  exec=24
+  first line: plt.figure(figsize=(9, 6))
+------------------------------------------------------------------------------
+<Figure size 900x600 with 1 Axes>
+[inline figure: image/png]
+
+------------------------------------------------------------------------------
+CELL [42]  id=9cef5c08  exec=25
+  first line: # neural demapper, perfect CSI, AWGN weights, block fading (L=25)
+------------------------------------------------------------------------------
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 5.8178e-02 | 4.8828e-01 |       44681 |      768000 |          500 |        1024 |         4.6 |reached target block errors
+neural    ebno=10.0: BER=5.8178e-02
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     14.0 | 4.7912e-02 | 4.5625e-01 |       45996 |      960000 |          584 |        1280 |         5.8 |reached target block errors
+neural    ebno=14.0: BER=4.7913e-02
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     18.0 | 1.4709e-01 | 9.7005e-01 |       84724 |      576000 |          745 |         768 |         3.5 |reached target block errors
+neural    ebno=18.0: BER=1.4709e-01
+
+------------------------------------------------------------------------------
+CELL [43]  id=53ec7389  exec=26
+  first line: # Matched classical control: identical channel call, identical L, P an
+------------------------------------------------------------------------------
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 1.4002e-02 | 1.6504e-01 |       32260 |     2304000 |          507 |        3072 |        13.7 |reached target block errors
+APP 64QAM ebno=10.0: BER=1.4002e-02
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     14.0 | 1.0258e-04 | 1.6602e-03 |        3939 |    38400000 |           85 |       51200 |       236.7 |reached max iterations
+APP 64QAM ebno=14.0: BER=1.0258e-04
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     18.0 | 0.0000e+00 | 0.0000e+00 |           0 |    38400000 |            0 |       51200 |       246.2 |reached max iterations
+
+Simulation stopped as no error occurred @ EbNo = 18.0 dB.
+
+APP 64QAM ebno=18.0: BER=0.0000e+00
+
+------------------------------------------------------------------------------
+CELL [45]  id=code-sec11c  exec=27
+  first line: # ============================================================
+------------------------------------------------------------------------------
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 5.9349e-02 | 4.9089e-01 |       34185 |      576000 |          377 |         768 |         3.2 |reached target block errors
+     12.0 | 3.3770e-02 | 3.3789e-01 |       25935 |      768000 |          346 |        1024 |         4.1 |reached target block errors
+     14.0 | 4.4823e-02 | 4.3359e-01 |       25818 |      576000 |          333 |         768 |         3.2 |reached target block errors
+     16.0 | 9.3505e-02 | 7.5195e-01 |       35906 |      384000 |          385 |         512 |         2.1 |reached target block errors
+     18.0 | 1.4552e-01 | 9.5312e-01 |       55880 |      384000 |          488 |         512 |         2.1 |reached target block errors
+--- as-is (control) done ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 5.8806e-02 | 4.9219e-01 |       33872 |      576000 |          378 |         768 |         3.1 |reached target block errors
+     12.0 | 3.2487e-02 | 3.3691e-01 |       24950 |      768000 |          345 |        1024 |         4.2 |reached target block errors
+     14.0 | 4.3927e-02 | 4.5052e-01 |       25302 |      576000 |          346 |         768 |         3.1 |reached target block errors
+     16.0 | 9.0810e-02 | 7.8320e-01 |       34871 |      384000 |          401 |         512 |         2.2 |reached target block errors
+     18.0 | 1.4249e-01 | 9.5508e-01 |       54717 |      384000 |          489 |         512 |         2.2 |reached target block errors
+--- LLR clamped to +/-8 done ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 4.9832e-02 | 4.3229e-01 |       28703 |      576000 |          332 |         768 |         3.4 |reached target block errors
+     12.0 | 3.8695e-02 | 3.5156e-01 |       29718 |      768000 |          360 |        1024 |         4.5 |reached target block errors
+     14.0 | 6.7000e-02 | 5.3646e-01 |       38592 |      576000 |          412 |         768 |         3.3 |reached target block errors
+     16.0 | 1.2506e-01 | 8.4375e-01 |       48023 |      384000 |          432 |         512 |         2.4 |reached target block errors
+     18.0 | 1.7076e-01 | 9.7070e-01 |       65573 |      384000 |          497 |         512 |         2.2 |reached target block errors
+--- deep fades erased done ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 4.9670e-02 | 4.3229e-01 |       28610 |      576000 |          332 |         768 |         3.5 |reached target block errors
+     12.0 | 3.8538e-02 | 3.5547e-01 |       29597 |      768000 |          364 |        1024 |         4.5 |reached target block errors
+     14.0 | 6.6132e-02 | 5.4948e-01 |       38092 |      576000 |          422 |         768 |         3.3 |reached target block errors
+     16.0 | 1.2366e-01 | 8.6133e-01 |       47485 |      384000 |          441 |         512 |         2.2 |reached target block errors
+     18.0 | 1.6838e-01 | 9.7266e-01 |       64657 |      384000 |          498 |         512 |         2.1 |reached target block errors
+--- clamped + erased done ---
+
+variant                |        10 dB |        12 dB |        14 dB |        16 dB |        18 dB | verdict
+----------------------------------------------------------------------------------------------------
+as-is (control)        |    5.935e-02 |    3.377e-02 |    4.482e-02 |    9.351e-02 |    1.455e-01 | U-SHAPED / non-monotonic
+LLR clamped to +/-8    |    5.881e-02 |    3.249e-02 |    4.393e-02 |    9.081e-02 |    1.425e-01 | U-SHAPED / non-monotonic
+deep fades erased      |    4.983e-02 |    3.870e-02 |    6.700e-02 |    1.251e-01 |    1.708e-01 | U-SHAPED / non-monotonic
+clamped + erased       |    4.967e-02 |    3.854e-02 |    6.613e-02 |    1.237e-01 |    1.684e-01 | U-SHAPED / non-monotonic
+
+A physical BER curve falls as SNR rises. Any row still flagged U-SHAPED was not fixed
+by that intervention; any row flagged monotonic was fixed without touching a weight.
+<Figure size 900x600 with 1 Axes>
+[inline figure: image/png]
+
+------------------------------------------------------------------------------
+CELL [48]  id=d11fb5f2  exec=28
+  first line: # retrain on block-fading + perfect CSI (no pilots yet, isolate variab
+------------------------------------------------------------------------------
+  perfect CSI  it 3000/3000: BCE(smoothed)=0.2085
+
+------------------------------------------------------------------------------
+CELL [49]  id=3aaddda5  exec=29
+  first line: print("=== after retrain (rayleigh_perfect_csi_weights) ===")
+------------------------------------------------------------------------------
+=== after retrain (rayleigh_perfect_csi_weights) ===
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 1.4806e-02 | 1.6569e-01 |       34113 |     2304000 |          509 |        3072 |        14.1 |reached target block errors
+ebno=10.0: BER=1.4806e-02
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     14.0 | 1.3703e-04 | 1.8945e-03 |        5262 |    38400000 |           97 |       51200 |       211.9 |reached max iterations
+ebno=14.0: BER=1.3703e-04
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     18.0 | 2.6042e-08 | 1.9531e-05 |           1 |    38400000 |            1 |       51200 |       268.3 |reached max iterations
+ebno=18.0: BER=2.6042e-08
+
+------------------------------------------------------------------------------
+CELL [51]  id=0ed3489f  exec=30
+  first line: # final form: block-fading + pilot-estimated CSI, retrain
+------------------------------------------------------------------------------
+  pilot CSI    it 3000/3000: BCE(smoothed)=0.2304
+
+converged BCE (32 seeded batches, identical draws):
+  perfect CSI    : 0.2090
+  P=4 pilot CSI  : 0.2307
+  cost of estimation: +0.0217 nats/bit
+<Figure size 700x400 with 1 Axes>
+[inline figure: image/png]
+
+------------------------------------------------------------------------------
+CELL [52]  id=a20d849f  exec=31
+  first line: print("=== pilot estimation + retrain (rayleigh_pilot_csi_weights) ===
+------------------------------------------------------------------------------
+=== pilot estimation + retrain (rayleigh_pilot_csi_weights) ===
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 3.1603e-02 | 3.2143e-01 |       42474 |     1344000 |          576 |        1792 |         8.6 |reached target block errors
+ebno=10.0: BER=3.1603e-02
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     14.0 | 3.7669e-04 | 4.9414e-03 |       14465 |    38400000 |          253 |       51200 |       233.0 |reached max iterations
+ebno=14.0: BER=3.7669e-04
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     18.0 | 7.8125e-08 | 1.9531e-05 |           3 |    38400000 |            1 |       51200 |       235.8 |reached max iterations
+ebno=18.0: BER=7.8125e-08
+
+------------------------------------------------------------------------------
+CELL [54]  id=code-sec12c  exec=32
+  first line: # ============================================================
+------------------------------------------------------------------------------
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.0867e-01 | 8.0729e-01 |       31298 |      288000 |          310 |         384 |         1.4 |reached target block errors
+      9.0 | 6.2452e-02 | 5.3594e-01 |       29977 |      480000 |          343 |         640 |         2.5 |reached target block errors
+     10.0 | 3.2745e-02 | 3.1836e-01 |       25148 |      768000 |          326 |        1024 |         4.0 |reached target block errors
+     11.0 | 1.2795e-02 | 1.4108e-01 |       20882 |     1632000 |          307 |        2176 |         8.4 |reached target block errors
+     12.0 | 4.8701e-03 | 5.3472e-02 |       21039 |     4320000 |          308 |        5760 |        23.1 |reached target block errors
+     13.0 | 1.3342e-03 | 1.8672e-02 |       12808 |     9600000 |          239 |       12800 |        52.2 |reached max iterations
+     14.0 | 4.0479e-04 | 5.1563e-03 |        3886 |     9600000 |           66 |       12800 |        51.2 |reached max iterations
+     15.0 | 9.3229e-05 | 1.3281e-03 |         895 |     9600000 |           17 |       12800 |        53.7 |reached max iterations
+     16.0 | 2.4062e-05 | 3.1250e-04 |         231 |     9600000 |            4 |       12800 |        52.7 |reached max iterations
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.0911e-01 | 7.9948e-01 |       31425 |      288000 |          307 |         384 |         1.7 |reached target block errors
+      9.0 | 6.4738e-02 | 5.7188e-01 |       31074 |      480000 |          366 |         640 |         2.8 |reached target block errors
+     10.0 | 3.1440e-02 | 3.4821e-01 |       21128 |      672000 |          312 |         896 |         4.0 |reached target block errors
+     11.0 | 1.3048e-02 | 1.5381e-01 |       20042 |     1536000 |          315 |        2048 |         9.3 |reached target block errors
+     12.0 | 4.2822e-03 | 5.5414e-02 |       17677 |     4128000 |          305 |        5504 |        24.9 |reached target block errors
+     13.0 | 1.4629e-03 | 1.9609e-02 |       14044 |     9600000 |          251 |       12800 |        57.8 |reached max iterations
+     14.0 | 3.4458e-04 | 5.7812e-03 |        3308 |     9600000 |           74 |       12800 |        57.9 |reached max iterations
+     15.0 | 1.1396e-04 | 1.7188e-03 |        1094 |     9600000 |           22 |       12800 |        58.6 |reached max iterations
+     16.0 | 2.6042e-05 | 3.1250e-04 |         250 |     9600000 |            4 |       12800 |        58.7 |reached max iterations
+
+========= Rayleigh block fading, P=4 pilots, estimated CSI =========
+BER 1e-02: autoencoder 11.26 dB | 64-QAM+APP 11.24 dB | gain -0.02 dB
+BER 1e-03: autoencoder 13.24 dB | 64-QAM+APP 13.26 dB | gain +0.02 dB
+BER 1e-04: autoencoder 14.95 dB | 64-QAM+APP 15.09 dB | gain +0.14 dB
+<Figure size 1300x500 with 2 Axes>
+[inline figure: image/png]
+
+------------------------------------------------------------------------------
+CELL [56]  id=f4f1b6fe  exec=33
+  first line: ebno_dbs_final = np.arange(8.0, 16.1, 1.0)
+------------------------------------------------------------------------------
+===== retrain P=2 =====
+  P=2  it 2000/2000: BCE(smoothed)=0.2384
+  P=2 trained, validation BCE=0.2377
+===== retrain P=4 =====
+  P=4  it 2000/2000: BCE(smoothed)=0.2324
+  P=4 trained, validation BCE=0.2320
+===== retrain P=6 =====
+  P=6  it 2000/2000: BCE(smoothed)=0.2375
+  P=6 trained, validation BCE=0.2373
+===== retrain P=8 =====
+  P=8  it 2000/2000: BCE(smoothed)=0.2467
+  P=8 trained, validation BCE=0.2442
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.1951e-01 | 8.2292e-01 |       34420 |      288000 |          316 |         384 |         1.7 |reached target block errors
+      9.0 | 6.9804e-02 | 5.7500e-01 |       33506 |      480000 |          368 |         640 |         2.7 |reached target block errors
+     10.0 | 3.9104e-02 | 3.6496e-01 |       26278 |      672000 |          327 |         896 |         3.6 |reached target block errors
+     11.0 | 1.7263e-02 | 1.8527e-01 |       23201 |     1344000 |          332 |        1792 |         8.1 |reached target block errors
+     12.0 | 6.3939e-03 | 7.3486e-02 |       19642 |     3072000 |          301 |        4096 |        16.5 |reached target block errors
+     13.0 | 2.6810e-03 | 3.3312e-02 |       18531 |     6912000 |          307 |        9216 |        36.6 |reached target block errors
+     14.0 | 7.4615e-04 | 9.5312e-03 |        7163 |     9600000 |          122 |       12800 |        50.5 |reached max iterations
+     15.0 | 1.6615e-04 | 2.1875e-03 |        1595 |     9600000 |           28 |       12800 |        50.7 |reached max iterations
+     16.0 | 3.9479e-05 | 8.5938e-04 |         379 |     9600000 |           11 |       12800 |        51.1 |reached max iterations
+--- P=2 evaluated (autoencoder) ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.0912e-01 | 8.1771e-01 |       31427 |      288000 |          314 |         384 |         1.5 |reached target block errors
+      9.0 | 6.2808e-02 | 5.5000e-01 |       30148 |      480000 |          352 |         640 |         2.5 |reached target block errors
+     10.0 | 3.3180e-02 | 3.2129e-01 |       25482 |      768000 |          329 |        1024 |         4.1 |reached target block errors
+     11.0 | 1.2852e-02 | 1.4062e-01 |       20974 |     1632000 |          306 |        2176 |         8.7 |reached target block errors
+     12.0 | 4.9001e-03 | 5.4688e-02 |       20698 |     4224000 |          308 |        5632 |        22.7 |reached target block errors
+     13.0 | 1.3700e-03 | 2.0078e-02 |       13152 |     9600000 |          257 |       12800 |        48.4 |reached max iterations
+     14.0 | 4.1344e-04 | 5.2344e-03 |        3969 |     9600000 |           67 |       12800 |       157.0 |reached max iterations
+     15.0 | 9.3438e-05 | 1.3281e-03 |         897 |     9600000 |           17 |       12800 |       206.4 |reached max iterations
+     16.0 | 1.6979e-05 | 3.1250e-04 |         163 |     9600000 |            4 |       12800 |       200.3 |reached max iterations
+--- P=4 evaluated (autoencoder) ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.1750e-01 | 8.4896e-01 |       33839 |      288000 |          326 |         384 |         6.4 |reached target block errors
+      9.0 | 7.0865e-02 | 6.3867e-01 |       27212 |      384000 |          327 |         512 |         8.9 |reached target block errors
+     10.0 | 3.3321e-02 | 3.3705e-01 |       22392 |      672000 |          302 |         896 |        16.6 |reached target block errors
+     11.0 | 1.2884e-02 | 1.5625e-01 |       19790 |     1536000 |          320 |        2048 |        36.3 |reached target block errors
+     12.0 | 4.7464e-03 | 5.8498e-02 |       18682 |     3936000 |          307 |        5248 |        51.2 |reached target block errors
+     13.0 | 1.4154e-03 | 1.6641e-02 |       13588 |     9600000 |          213 |       12800 |       116.3 |reached max iterations
+     14.0 | 2.5802e-04 | 3.5156e-03 |        2477 |     9600000 |           45 |       12800 |        57.2 |reached max iterations
+     15.0 | 7.4479e-05 | 1.3281e-03 |         715 |     9600000 |           17 |       12800 |        40.3 |reached max iterations
+     16.0 | 1.0104e-05 | 4.6875e-04 |          97 |     9600000 |            6 |       12800 |        43.0 |reached max iterations
+--- P=6 evaluated (autoencoder) ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.3462e-01 | 8.9583e-01 |       38771 |      288000 |          344 |         384 |         1.3 |reached target block errors
+      9.0 | 7.9302e-02 | 6.6016e-01 |       30452 |      384000 |          338 |         512 |         1.8 |reached target block errors
+     10.0 | 4.2363e-02 | 4.2057e-01 |       24401 |      576000 |          323 |         768 |         2.8 |reached target block errors
+     11.0 | 1.5725e-02 | 1.8930e-01 |       19625 |     1248000 |          315 |        1664 |         5.9 |reached target block errors
+     12.0 | 5.2991e-03 | 6.7857e-02 |       17805 |     3360000 |          304 |        4480 |        15.9 |reached target block errors
+     13.0 | 1.3188e-03 | 2.0156e-02 |       12660 |     9600000 |          258 |       12800 |        48.4 |reached max iterations
+     14.0 | 4.0167e-04 | 4.9219e-03 |        3856 |     9600000 |           63 |       12800 |        49.5 |reached max iterations
+     15.0 | 2.3646e-05 | 3.9063e-04 |         227 |     9600000 |            5 |       12800 |        50.0 |reached max iterations
+     16.0 | 2.0104e-05 | 3.1250e-04 |         193 |     9600000 |            4 |       12800 |        49.9 |reached max iterations
+--- P=8 evaluated (autoencoder) ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.1769e-01 | 8.5677e-01 |       33894 |      288000 |          329 |         384 |         1.6 |reached target block errors
+      9.0 | 7.5982e-02 | 6.4062e-01 |       29177 |      384000 |          328 |         512 |         2.3 |reached target block errors
+     10.0 | 4.7981e-02 | 4.4531e-01 |       27637 |      576000 |          342 |         768 |         3.2 |reached target block errors
+     11.0 | 2.2734e-02 | 2.4766e-01 |       21825 |      960000 |          317 |        1280 |         5.3 |reached target block errors
+     12.0 | 8.9429e-03 | 1.0394e-01 |       19746 |     2208000 |          306 |        2944 |        12.6 |reached target block errors
+     13.0 | 3.0535e-03 | 3.9857e-02 |       17295 |     5664000 |          301 |        7552 |        33.3 |reached target block errors
+     14.0 | 9.1292e-04 | 1.1797e-02 |        8764 |     9600000 |          151 |       12800 |        55.8 |reached max iterations
+     15.0 | 3.0958e-04 | 3.8281e-03 |        2972 |     9600000 |           49 |       12800 |        55.9 |reached max iterations
+     16.0 | 5.4062e-05 | 1.0938e-03 |         519 |     9600000 |           14 |       12800 |        56.5 |reached max iterations
+--- P=2 evaluated (classical) ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.0911e-01 | 7.9948e-01 |       31425 |      288000 |          307 |         384 |         1.6 |reached target block errors
+      9.0 | 6.4738e-02 | 5.7188e-01 |       31074 |      480000 |          366 |         640 |         2.7 |reached target block errors
+     10.0 | 3.1440e-02 | 3.4821e-01 |       21128 |      672000 |          312 |         896 |         3.8 |reached target block errors
+     11.0 | 1.3048e-02 | 1.5381e-01 |       20042 |     1536000 |          315 |        2048 |         8.8 |reached target block errors
+     12.0 | 4.2822e-03 | 5.5414e-02 |       17677 |     4128000 |          305 |        5504 |        23.8 |reached target block errors
+     13.0 | 1.4629e-03 | 1.9609e-02 |       14044 |     9600000 |          251 |       12800 |        56.6 |reached max iterations
+     14.0 | 3.4458e-04 | 5.7812e-03 |        3308 |     9600000 |           74 |       12800 |        56.5 |reached max iterations
+     15.0 | 1.1396e-04 | 1.7188e-03 |        1094 |     9600000 |           22 |       12800 |        55.9 |reached max iterations
+     16.0 | 2.6042e-05 | 3.1250e-04 |         250 |     9600000 |            4 |       12800 |        56.6 |reached max iterations
+--- P=4 evaluated (classical) ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.1613e-01 | 8.6458e-01 |       33444 |      288000 |          332 |         384 |         1.6 |reached target block errors
+      9.0 | 7.1107e-02 | 6.2695e-01 |       27305 |      384000 |          321 |         512 |         2.2 |reached target block errors
+     10.0 | 3.4262e-02 | 3.4863e-01 |       26313 |      768000 |          357 |        1024 |         4.3 |reached target block errors
+     11.0 | 1.4588e-02 | 1.7299e-01 |       19606 |     1344000 |          310 |        1792 |         7.6 |reached target block errors
+     12.0 | 4.3273e-03 | 6.2911e-02 |       15786 |     3648000 |          306 |        4864 |        20.9 |reached target block errors
+     13.0 | 1.4543e-03 | 1.9219e-02 |       13961 |     9600000 |          246 |       12800 |        55.8 |reached max iterations
+     14.0 | 2.7177e-04 | 4.7656e-03 |        2609 |     9600000 |           61 |       12800 |        56.5 |reached max iterations
+     15.0 | 9.5625e-05 | 1.4062e-03 |         918 |     9600000 |           18 |       12800 |        56.3 |reached max iterations
+     16.0 | 1.4167e-05 | 7.8125e-05 |         136 |     9600000 |            1 |       12800 |        56.7 |reached max iterations
+--- P=6 evaluated (classical) ---
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.3466e-01 | 9.3229e-01 |       38781 |      288000 |          358 |         384 |         1.6 |reached target block errors
+      9.0 | 8.1005e-02 | 6.7969e-01 |       31106 |      384000 |          348 |         512 |         2.2 |reached target block errors
+     10.0 | 4.2363e-02 | 4.4141e-01 |       24401 |      576000 |          339 |         768 |         3.2 |reached target block errors
+     11.0 | 1.8076e-02 | 2.1419e-01 |       20824 |     1152000 |          329 |        1536 |         6.6 |reached target block errors
+     12.0 | 6.2378e-03 | 7.9427e-02 |       17965 |     2880000 |          305 |        3840 |        16.4 |reached target block errors
+     13.0 | 1.5620e-03 | 2.2344e-02 |       14995 |     9600000 |          286 |       12800 |        55.2 |reached max iterations
+     14.0 | 3.4969e-04 | 5.9375e-03 |        3357 |     9600000 |           76 |       12800 |        55.8 |reached max iterations
+     15.0 | 4.1563e-05 | 6.2500e-04 |         399 |     9600000 |            8 |       12800 |        56.7 |reached max iterations
+     16.0 | 0.0000e+00 | 0.0000e+00 |           0 |     9600000 |            0 |       12800 |        58.2 |reached max iterations
+
+Simulation stopped as no error occurred @ EbNo = 16.0 dB.
+
+--- P=8 evaluated (classical) ---
+
+validation BCE by pilot count: P=2:0.2377  P=4:0.2320  P=6:0.2373  P=8:0.2442
+
+------------------------------------------------------------------------------
+CELL [57]  id=4c1bafc0  exec=34
+  first line: ncols = 2 if BER_final_classical else 1
+------------------------------------------------------------------------------
+<Figure size 1300x550 with 2 Axes>
+[inline figure: image/png]
+Eb/N0 at BER 1e-2 (lower is better):
+  autoencoder P=2  : 11.55 dB
+  autoencoder P=4  : 11.26 dB
+  autoencoder P=6  : 11.25 dB
+  autoencoder P=8  : 11.42 dB
+
+------------------------------------------------------------------------------
+CELL [59]  id=15c992bc  exec=35
+  first line: set_seed(42)
+------------------------------------------------------------------------------
+b: torch.Size([64, 750]) b_hat: torch.Size([64, 750])
+forward pass OK
+
+------------------------------------------------------------------------------
+CELL [60]  id=ea54801d  exec=36
+  first line: # train CNN demapper at P=2 (from scratch: the AWGN weights are MLP-sh
+------------------------------------------------------------------------------
+  CNN  it 4000/4000: BCE(smoothed)=0.2467
+CNN  validation BCE: 0.2456
+
+------------------------------------------------------------------------------
+CELL [61]  id=6fceeb65  exec=37
+  first line: print("=== CNN P=2 ===")
+------------------------------------------------------------------------------
+=== CNN P=2 ===
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     10.0 | 4.3131e-02 | 3.9687e-01 |       41406 |      960000 |          508 |        1280 |         5.7 |reached target block errors
+ebno=10.0: BER=4.3131e-02
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     14.0 | 9.0142e-04 | 1.1933e-02 |       28384 |    31488000 |          501 |       41984 |       186.5 |reached target block errors
+ebno=14.0: BER=9.0142e-04
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+     18.0 | 1.4219e-05 | 2.1484e-04 |         546 |    38400000 |           11 |       51200 |       227.1 |reached max iterations
+ebno=18.0: BER=1.4219e-05
+
+------------------------------------------------------------------------------
+CELL [62]  id=6c9830fc  exec=38
+  first line: ebno_cmp = np.arange(8.0, 16.1, 1.0)
+------------------------------------------------------------------------------
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.1951e-01 | 8.2292e-01 |       34420 |      288000 |          316 |         384 |         1.5 |reached target block errors
+      9.0 | 6.9804e-02 | 5.7500e-01 |       33506 |      480000 |          368 |         640 |         2.4 |reached target block errors
+     10.0 | 3.9104e-02 | 3.6496e-01 |       26278 |      672000 |          327 |         896 |         3.5 |reached target block errors
+     11.0 | 1.7263e-02 | 1.8527e-01 |       23201 |     1344000 |          332 |        1792 |         7.0 |reached target block errors
+     12.0 | 6.3939e-03 | 7.3486e-02 |       19642 |     3072000 |          301 |        4096 |        15.7 |reached target block errors
+     13.0 | 2.6810e-03 | 3.3312e-02 |       18531 |     6912000 |          307 |        9216 |        35.2 |reached target block errors
+     14.0 | 7.4615e-04 | 9.5312e-03 |        7163 |     9600000 |          122 |       12800 |        49.1 |reached max iterations
+     15.0 | 1.6615e-04 | 2.1875e-03 |        1595 |     9600000 |           28 |       12800 |        49.3 |reached max iterations
+     16.0 | 3.9479e-05 | 8.5938e-04 |         379 |     9600000 |           11 |       12800 |        49.2 |reached max iterations
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      8.0 | 1.1609e-01 | 8.0990e-01 |       33435 |      288000 |          311 |         384 |         1.5 |reached target block errors
+      9.0 | 7.2643e-02 | 6.2109e-01 |       27895 |      384000 |          318 |         512 |         2.0 |reached target block errors
+     10.0 | 4.4172e-02 | 4.0885e-01 |       25443 |      576000 |          314 |         768 |         3.0 |reached target block errors
+     11.0 | 2.2031e-02 | 2.2230e-01 |       23265 |     1056000 |          313 |        1408 |         5.5 |reached target block errors
+     12.0 | 8.4828e-03 | 9.2248e-02 |       21173 |     2496000 |          307 |        3328 |        12.9 |reached target block errors
+     13.0 | 3.1577e-03 | 3.7450e-02 |       19098 |     6048000 |          302 |        8064 |        32.0 |reached target block errors
+     14.0 | 9.9208e-04 | 1.3516e-02 |        9524 |     9600000 |          173 |       12800 |        49.2 |reached max iterations
+     15.0 | 1.7448e-04 | 3.0469e-03 |        1675 |     9600000 |           39 |       12800 |        49.6 |reached max iterations
+     16.0 | 1.0042e-04 | 1.6406e-03 |         964 |     9600000 |           21 |       12800 |        51.1 |reached max iterations
+demapper parameters: MLP 17798  |  CNN 13766  (0.8x)
+BER 1e-02: MLP 11.55 dB | CNN 11.83 dB | CNN advantage -0.28 dB
+BER 1e-03: MLP 13.77 dB | CNN 13.99 dB | CNN advantage -0.22 dB
+<Figure size 900x600 with 1 Axes>
+[inline figure: image/png]
+
+------------------------------------------------------------------------------
+CELL [64]  id=1e151a88  exec=39
+  first line: # ============================================================
+------------------------------------------------------------------------------
+===== width=16 =====
+  w=16  it 5000/5000: BCE(smoothed)=0.2972
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      5.0 | 4.6945e-02 | 7.5195e-01 |       18027 |      384000 |          385 |         512 |         2.0 |reached target block errors
+      6.0 | 9.8014e-04 | 3.6743e-02 |        6022 |     6144000 |          301 |        8192 |        31.9 |reached target block errors
+      7.0 | 1.0417e-07 | 7.8125e-05 |           1 |     9600000 |            1 |       12800 |        49.3 |reached max iterations
+  width=16: params=438, validation BCE=0.2963
+===== width=32 =====
+  w=32  it 5000/5000: BCE(smoothed)=0.2981
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      5.0 | 2.8414e-02 | 6.1523e-01 |       10911 |      384000 |          315 |         512 |         2.0 |reached target block errors
+      6.0 | 2.5687e-04 | 1.8516e-02 |        2466 |     9600000 |          237 |       12800 |        49.8 |reached max iterations
+      7.0 | 4.1667e-07 | 7.8125e-05 |           4 |     9600000 |            1 |       12800 |        49.0 |reached max iterations
+  width=32: params=1382, validation BCE=0.2977
+===== width=64 =====
+  w=64  it 5000/5000: BCE(smoothed)=0.2872
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      5.0 | 2.4527e-02 | 5.6250e-01 |       11773 |      480000 |          360 |         640 |         2.6 |reached target block errors
+      6.0 | 2.9135e-04 | 1.7734e-02 |        2797 |     9600000 |          227 |       12800 |        52.6 |reached max iterations
+      7.0 | 0.0000e+00 | 0.0000e+00 |           0 |     9600000 |            0 |       12800 |        48.1 |reached max iterations
+
+Simulation stopped as no error occurred @ EbNo = 7.0 dB.
+
+  width=64: params=4806, validation BCE=0.2870
+===== width=128 =====
+  w=128  it 5000/5000: BCE(smoothed)=0.2865
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      5.0 | 2.3133e-02 | 5.4375e-01 |       11104 |      480000 |          348 |         640 |         2.6 |reached target block errors
+      6.0 | 2.2740e-04 | 1.5547e-02 |        2183 |     9600000 |          199 |       12800 |        49.1 |reached max iterations
+      7.0 | 4.1667e-07 | 7.8125e-05 |           4 |     9600000 |            1 |       12800 |        49.0 |reached max iterations
+  width=128: params=17798, validation BCE=0.2869
+
+================= SUMMARY =================
+ width |  params |     BCE |    BER@5dB |    BER@6dB |    BER@7dB
+    16 |     438 | 0.2963 | 4.695e-02 | 9.801e-04 | 1.042e-07
+    32 |    1382 | 0.2977 | 2.841e-02 | 2.569e-04 | 4.167e-07
+    64 |    4806 | 0.2870 | 2.453e-02 | 2.914e-04 | 0.000e+00
+   128 |   17798 | 0.2869 | 2.313e-02 | 2.274e-04 | 4.167e-07
+
+BCE spread across widths: 0.0107
+
+------------------------------------------------------------------------------
+CELL [66]  id=2f19d08b  exec=40
+  first line: ebno_wide = np.arange(4.0, 20.1, 2.0)
+------------------------------------------------------------------------------
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      4.0 | 2.0062e-01 | 1.0000e+00 |      115557 |      576000 |          384 |         384 |         0.1 |reached target block errors
+      6.0 | 1.6038e-01 | 1.0000e+00 |       92381 |      576000 |          384 |         384 |         0.0 |reached target block errors
+      8.0 | 1.2491e-01 | 1.0000e+00 |       71948 |      576000 |          384 |         384 |         0.0 |reached target block errors
+     10.0 | 9.7498e-02 | 1.0000e+00 |       56159 |      576000 |          384 |         384 |         0.0 |reached target block errors
+     12.0 | 6.9333e-02 | 1.0000e+00 |       39936 |      576000 |          384 |         384 |         0.0 |reached target block errors
+     14.0 | 4.7399e-02 | 1.0000e+00 |       27302 |      576000 |          384 |         384 |         0.0 |reached target block errors
+     16.0 | 3.4417e-02 | 1.0000e+00 |       19824 |      576000 |          384 |         384 |         0.0 |reached target block errors
+     18.0 | 2.4146e-02 | 1.0000e+00 |       13908 |      576000 |          384 |         384 |         0.0 |reached target block errors
+     20.0 | 2.2160e-02 | 9.9740e-01 |       12764 |      576000 |          383 |         384 |         0.0 |reached target block errors
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      4.0 | 2.3078e-01 | 9.9740e-01 |       66465 |      288000 |          383 |         384 |         1.5 |reached target block errors
+      6.0 | 1.8264e-01 | 9.7917e-01 |       52599 |      288000 |          376 |         384 |         1.5 |reached target block errors
+      8.0 | 1.0465e-01 | 7.7344e-01 |       40184 |      384000 |          396 |         512 |         2.0 |reached target block errors
+     10.0 | 3.2428e-02 | 3.0371e-01 |       24905 |      768000 |          311 |        1024 |         4.0 |reached target block errors
+     12.0 | 4.6114e-03 | 5.4688e-02 |       19036 |     4128000 |          301 |        5504 |        21.1 |reached target block errors
+     14.0 | 3.8979e-04 | 4.8437e-03 |        3742 |     9600000 |           62 |       12800 |        50.0 |reached max iterations
+     16.0 | 2.5000e-06 | 2.3437e-04 |          24 |     9600000 |            3 |       12800 |        49.9 |reached max iterations
+     18.0 | 0.0000e+00 | 0.0000e+00 |           0 |     9600000 |            0 |       12800 |        49.8 |reached max iterations
+
+Simulation stopped as no error occurred @ EbNo = 18.0 dB.
+<Figure size 900x600 with 1 Axes>
+[inline figure: image/png]
+
+------------------------------------------------------------------------------
+CELL [68]  id=867ce0e3  exec=41
+  first line: # ============================================================
+------------------------------------------------------------------------------
+===== training: fixed 15 dB =====
+  fixed 15 dB  it 3000/3000: BCE(smoothed)=0.1480
+  validation BCE (over 0-20 dB): 0.2993
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      0.0 | 3.0173e-01 | 1.0000e+00 |       86897 |      288000 |          384 |         384 |         1.6 |reached target block errors
+      2.0 | 2.6841e-01 | 1.0000e+00 |       77301 |      288000 |          384 |         384 |         1.5 |reached target block errors
+      4.0 | 2.3179e-01 | 1.0000e+00 |       66755 |      288000 |          384 |         384 |         1.5 |reached target block errors
+      6.0 | 1.8944e-01 | 9.8698e-01 |       54559 |      288000 |          379 |         384 |         1.5 |reached target block errors
+      8.0 | 1.0449e-01 | 7.5195e-01 |       40125 |      384000 |          385 |         512 |         2.1 |reached target block errors
+     10.0 | 3.3671e-02 | 3.2324e-01 |       25859 |      768000 |          331 |        1024 |         3.9 |reached target block errors
+     12.0 | 5.3420e-03 | 5.8308e-02 |       21026 |     3936000 |          306 |        5248 |        20.1 |reached target block errors
+     14.0 | 3.8281e-04 | 5.6250e-03 |        3675 |     9600000 |           72 |       12800 |        49.3 |reached max iterations
+     16.0 | 5.5208e-06 | 2.3437e-04 |          53 |     9600000 |            3 |       12800 |        49.1 |reached max iterations
+     18.0 | 0.0000e+00 | 0.0000e+00 |           0 |     9600000 |            0 |       12800 |        49.3 |reached max iterations
+
+Simulation stopped as no error occurred @ EbNo = 18.0 dB.
+
+--- fixed 15 dB evaluated ---
+===== training: uniform 8-16 dB =====
+  uniform 8-16 dB  it 3000/3000: BCE(smoothed)=0.2304
+  validation BCE (over 0-20 dB): 0.2976
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      0.0 | 2.9969e-01 | 1.0000e+00 |       86310 |      288000 |          384 |         384 |         1.6 |reached target block errors
+      2.0 | 2.6618e-01 | 1.0000e+00 |       76659 |      288000 |          384 |         384 |         1.5 |reached target block errors
+      4.0 | 2.2958e-01 | 1.0000e+00 |       66119 |      288000 |          384 |         384 |         1.5 |reached target block errors
+      6.0 | 1.8542e-01 | 9.8177e-01 |       53402 |      288000 |          377 |         384 |         1.5 |reached target block errors
+      8.0 | 1.0002e-01 | 7.2852e-01 |       38409 |      384000 |          373 |         512 |         1.9 |reached target block errors
+     10.0 | 3.0958e-02 | 3.0566e-01 |       23776 |      768000 |          313 |        1024 |         3.9 |reached target block errors
+     12.0 | 4.7495e-03 | 5.2778e-02 |       20518 |     4320000 |          304 |        5760 |        22.2 |reached target block errors
+     14.0 | 3.0458e-04 | 4.6094e-03 |        2924 |     9600000 |           59 |       12800 |        49.3 |reached max iterations
+     16.0 | 4.3750e-06 | 2.3437e-04 |          42 |     9600000 |            3 |       12800 |        48.6 |reached max iterations
+     18.0 | 0.0000e+00 | 0.0000e+00 |           0 |     9600000 |            0 |       12800 |        49.1 |reached max iterations
+
+Simulation stopped as no error occurred @ EbNo = 18.0 dB.
+
+--- uniform 8-16 dB evaluated ---
+===== training: uniform 0-20 dB =====
+  uniform 0-20 dB  it 3000/3000: BCE(smoothed)=0.2957
+  validation BCE (over 0-20 dB): 0.2972
+EbNo [dB] |        BER |       BLER |  bit errors |    num bits | block errors |  num blocks | runtime [s] |    status
+---------------------------------------------------------------------------------------------------------------------------------------
+      0.0 | 2.9807e-01 | 1.0000e+00 |       85844 |      288000 |          384 |         384 |         1.6 |reached target block errors
+      2.0 | 2.6491e-01 | 1.0000e+00 |       76293 |      288000 |          384 |         384 |         1.5 |reached target block errors
+      4.0 | 2.2732e-01 | 9.9740e-01 |       65467 |      288000 |          383 |         384 |         1.5 |reached target block errors
+      6.0 | 1.8356e-01 | 9.8438e-01 |       52865 |      288000 |          378 |         384 |         1.5 |reached target block errors
+      8.0 | 9.8820e-02 | 7.2656e-01 |       37947 |      384000 |          372 |         512 |         2.0 |reached target block errors
+     10.0 | 3.0039e-02 | 3.0176e-01 |       23070 |      768000 |          309 |        1024 |         4.0 |reached target block errors
+     12.0 | 4.4403e-03 | 5.3267e-02 |       18756 |     4224000 |          300 |        5632 |        21.7 |reached target block errors
+     14.0 | 2.8542e-04 | 4.2969e-03 |        2740 |     9600000 |           55 |       12800 |        49.9 |reached max iterations
+     16.0 | 3.5417e-06 | 2.3437e-04 |          34 |     9600000 |            3 |       12800 |        49.1 |reached max iterations
+     18.0 | 0.0000e+00 | 0.0000e+00 |           0 |     9600000 |            0 |       12800 |        49.3 |reached max iterations
+
+Simulation stopped as no error occurred @ EbNo = 18.0 dB.
+
+--- uniform 0-20 dB evaluated ---
+<Figure size 900x600 with 1 Axes>
+[inline figure: image/png]

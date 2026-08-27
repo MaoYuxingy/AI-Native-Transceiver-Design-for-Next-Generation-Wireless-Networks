@@ -1,0 +1,92 @@
+<div class="col">
+
+  <div class="card">
+    <h2>Performance Analysis</h2>
+    <div class="in">
+      <p><b>Both channels, both receivers, one axis</b> &mdash; colour is the channel, line
+      style the receiver.</p>
+      <figure><img src="__IMG_GLOBAL__" alt="BER and block-success curves for four systems: AWGN pair at low Eb/N0, Rayleigh pair far to the right, with the fading penalty marked."></figure>
+      <ul style="margin-top:4mm">
+        <li>Fading costs <span class="r">5.9&ndash;8.8 dB</span>; the choice of receiver moves
+        things by under <span class="n">0.4 dB</span>.</li>
+        <li><b>AWGN:</b> the learned system wins by
+        <span class="r">+0.37 / +0.39 / +0.35 dB</span> at BER 1e-2 / 1e-3 / 1e-4. APP demapping is
+        already optimal here, so this is <b>constellation shaping alone</b>.</li>
+        <li><b>Rayleigh with estimated CSI:</b> <span class="r">no measurable gain</span>
+        (+0.01 / +0.11 / &minus;0.15 dB) &mdash; the 1e-4 figure <b>changed sign</b> between two
+        runs of the same systems, so it is noise, not a difference.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Why AWGN Weights Fail on Fading</h2>
+    <div class="in">
+      <p>Reused on fading, AWGN-trained weights give a BER curve that <span class="r">rises</span>
+      with SNR. The weights were held fixed and <b>one thing changed at a time</b>:</p>
+      <ul>
+        <li>Clamping the network's outputs: under 4% change &mdash; <b>the rise remains</b>.</li>
+        <li>Erasing deep-fade symbols: <b>worse</b> above 10 dB.</li>
+        <li>Clamping the noise level <b>reported to the demapper</b> back into its training range:
+        <span class="r">the curve becomes physical</span>, with no weight changed.</li>
+      </ul>
+      <p style="margin-top:3mm">The failure is on the <b>input</b> side, in the <b>quiet</b>
+      tail: at 18 dB <span class="r">89%</span> of symbols are quieter than anything seen in
+      training, against 4.6% in deep fades. Retraining restores a monotonic curve &mdash;
+      <span class="n">1e-3</span> at 13.2 dB, <span class="n">1e-4</span> at 14.9 dB.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Learning Without a Channel Model</h2>
+    <div class="in">
+      <p>Every result above needed a differentiable channel to backpropagate through; a deployed
+      transmitter has none. Here the receiver trains normally &mdash; its gradient never crosses the
+      channel &mdash; while the transmitter perturbs its own symbols and updates from
+      <b>one scalar per codeword</b> [4]. <b>The channel is sampled, never differentiated.</b></p>
+      <figure><img src="__IMG_RL__" alt="Left: three BER curves on AWGN, the RL-trained system sitting between the gradient-trained one and classical 64-QAM. Right: the two learned constellations with a line joining each symbol's two positions, showing they nearly coincide."></figure>
+      <ul style="margin-top:4mm">
+        <li><b>Price of dispensing with the channel model:</b>
+        <span class="r">+0.12 / +0.15 / +0.12 dB</span> at BER 1e-2 / 1e-3 / 1e-4.</li>
+        <li>The RL-trained system still beats classical 64-QAM by <span class="r">0.24 dB</span>
+        &mdash; with <b>no channel model anywhere in training</b>.</li>
+        <li>Both methods put the same symbol in nearly the same place (right panel), so RL is
+        finding the gradient method's solution rather than a different one.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Conclusion and Next Steps</h2>
+    <div class="in">
+      <p>End-to-end learning buys <b>0.37 dB on AWGN</b> and <b>nothing once the channel fades
+      and CSI is estimated</b>. So accuracy is not the case for AI-native transceivers &mdash; the
+      case is that the design <span class="r">needs no channel model</span>, and that now carries a
+      <b>measured price of 0.12&ndash;0.15 dB</b> rather than an assumption.</p>
+      <ul>
+        <li><b>RQ1 &mdash; no channel model. <span class="r">Answered.</span></b> RL training costs
+        0.12&ndash;0.15 dB against gradient training, and still beats the classical receiver by
+        0.24 dB.</li>
+        <li><b>RQ2 &mdash; fast adaptation.</b> Remaining work. Meta-learning [3] targets exactly
+        the failure measured above &mdash; motivation <b>measured here, not cited</b>.</li>
+      </ul>
+      <p style="font-size:16pt;line-height:1.32;margin-top:4mm;color:#3d4a57">64,000 codewords per
+      SNR point; points below 30 block errors dropped, not plotted. Seeds fixed throughout, and
+      every number here is measured in the notebook rather than quoted. Sionna [5] + PyTorch.
+      <b>Scope:</b> flat block fading only &mdash; no multipath, Doppler or OFDM.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="refs">
+  <div>[1] T. O&rsquo;Shea, J. Hoydis, &ldquo;Deep Learning for the Physical Layer,&rdquo; arXiv:1702.00832, 2017.</div>
+  <div>[2] H. Ye, G. Y. Li, B.-H. F. Juang, &ldquo;Deep Learning for Channel Estimation and Detection in OFDM,&rdquo; arXiv:1708.08514, 2017.</div>
+  <div>[3] S. Smeka J. et al., &ldquo;Enhanced Reptile for Rapid Adaptation,&rdquo; SCSE, IEEE, 2025.</div>
+  <div>[4] N. C. Luong et al., &ldquo;Deep RL in Communications and Networking: A Survey,&rdquo; IEEE Commun. Surveys Tuts. 21(4), 2019.</div>
+  <div>[5] NVIDIA Sionna, autoencoder tutorial notebook &mdash; the starting point this work extends.</div>
+</div>
+
+<div class="foot"></div>
+</div>
