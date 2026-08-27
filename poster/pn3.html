@@ -57,18 +57,20 @@
   </div>
 
   <div class="card">
-    <h2>Conclusion and Next Steps</h2>
+    <h2>Conclusion</h2>
     <div class="in">
       <p>End-to-end learning buys <b>0.37 dB on AWGN</b> and <b>nothing once the channel fades
       and CSI is estimated</b>. So accuracy is not the case for AI-native transceivers &mdash; the
       case is that the design <span class="r">needs no channel model</span>, and that now carries a
       <b>measured price of 0.12&ndash;0.15 dB</b> rather than an assumption.</p>
       <ul>
-        <li><b>RQ1 &mdash; no channel model. <span class="r">Answered.</span></b> RL training costs
-        0.12&ndash;0.15 dB against gradient training, and still beats the classical receiver by
-        0.24 dB.</li>
-        <li><b>RQ2 &mdash; fast adaptation.</b> Remaining work. Meta-learning [3] targets exactly
-        the failure measured above &mdash; motivation <b>measured here, not cited</b>.</li>
+        <li><b>RQ1 &mdash; training without a channel model. <span class="r">Answered.</span></b>
+        The transmitter learns from one scalar per codeword, and the channel is never
+        differentiated.</li>
+        <li><b>RQ2 &mdash; fast adaptation.</b> The measurements say where the difficulty lies: the
+        demapper fails on <b>distribution shift</b>, not on a harder channel. Adaptation is
+        therefore a distribution-shift problem, which is what meta-learning [3] addresses &mdash; a
+        motivation <b>measured here, not cited</b>.</li>
       </ul>
       <p style="font-size:16pt;line-height:1.32;margin-top:4mm;color:#3d4a57">64,000 codewords per
       SNR point; points below 30 block errors dropped, not plotted. Seeds fixed throughout, and
