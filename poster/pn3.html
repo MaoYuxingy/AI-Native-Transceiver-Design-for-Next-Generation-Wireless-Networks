@@ -19,17 +19,16 @@
         </tbody>
       </table>
       <ul style="margin-top:3.4mm">
-        <li>Fading costs between <span class="r">5.9 and 8.8 dB</span>, depending on the target
-        error rate. Changing the receiver moves the curve by less than <b>0.4 dB</b>, an order of
-        magnitude less.</li>
-        <li>On AWGN the learned system wins by <span class="r">0.37, 0.39 and 0.35 dB</span> at BER
-        1e-2, 1e-3 and 1e-4. The APP demapper is already optimal there, so this is
-        <b>constellation shaping alone</b>.</li>
+        <li>Fading costs <span class="r">5.9 to 8.8 dB</span>, depending on the target error rate,
+        while the choice of receiver changes the result by less than <b>0.4 dB</b>.</li>
+        <li>On AWGN the learned system gains <span class="r">0.37, 0.39 and 0.35 dB</span> at BER
+        1e-2, 1e-3 and 1e-4. APP demapping is already optimal here, so the gain comes from
+        <b>constellation shaping</b>.</li>
         <li>Leaving the (1+1/P) factor out of the effective noise understates it by
         <span class="r">1.76 dB</span> at P = 2.</li>
-        <li>Under Rayleigh fading with estimated CSI we found <span class="r">no measurable
-        gain</span> (+0.01, +0.11 and &minus;0.15 dB). The value at 1e-4 changed sign between two
-        runs of the same systems, so we treat it as noise.</li>
+        <li>Under Rayleigh fading with estimated CSI we measured <span class="r">no gain</span>
+        (+0.01, +0.11 and &minus;0.15 dB). The value at 1e-4 changed sign between two runs, so we
+        treat it as noise.</li>
       </ul>
     </div>
   </div>
@@ -37,38 +36,39 @@
   <div class="card">
     <h2>Why AWGN Weights Fail on Fading</h2>
     <div class="in">
-      <p>If the AWGN weights are reused on a fading channel without retraining, the BER curve rises
-      with SNR. That cannot be physical, so we held every weight fixed and changed one thing at a
-      time:</p>
+      <p>When the AWGN weights are used on a fading channel without retraining, the BER increases
+      as the SNR increases. A real system cannot behave this way, so we kept every weight fixed and
+      changed one thing at a time:</p>
       <ul>
-        <li>Clamping the network outputs changed the result by under 4%, and the curve still
-        rose.</li>
-        <li>Erasing the symbols in deep fades made matters worse above 10 dB.</li>
-        <li>Clamping the noise reported to the demapper back into its training range
-        <span class="r">made the curve fall properly again</span>, with no weight changed.</li>
+        <li>Clamping the network outputs changed the BER by less than 4%, and the curve still
+        increased.</li>
+        <li>Removing the symbols in deep fades made the BER worse above 10 dB.</li>
+        <li>Clamping the noise value passed to the demapper into the range it saw during training
+        <span class="r">restored a decreasing curve</span>, without changing any weight.</li>
       </ul>
-      <p style="margin-top:3mm">The problem is on the input side, and in the quiet tail rather than
-      the deep fades: at 18 dB, <span class="r">89%</span> of symbols arrive with an effective
-      noise lower than anything seen in training, against 4.6% in deep fades. Retraining fixes it,
-      reaching <span class="n">1e-3</span> at 13.2 dB and <span class="n">1e-4</span> at
-      14.9 dB.</p>
+      <p style="margin-top:3mm">The cause is on the input side: at 18 dB,
+      <span class="r">89%</span> of symbols have an effective noise below anything the network saw
+      in training, and only 4.6% are in deep fades. Retraining on the fading channel gives BER
+      <span class="n">1e-3</span> at 13.2 dB and <span class="n">1e-4</span> at 14.9 dB.</p>
     </div>
   </div>
 
   <div class="card">
     <h2>Learning Without a Channel Model</h2>
     <div class="in">
-      <p>Everything above was trained by backpropagating through a differentiable channel, which a
-      deployed transmitter does not have. Here the receiver trains as usual, but its gradient never
-      reaches the channel. The transmitter perturbs its own symbols, gets back a single scalar per
-      codeword, and updates from that alone [4], so the channel is only ever sampled.</p>
+      <p>All the results above were obtained by backpropagating through a differentiable channel
+      model, which a deployed system does not have. Here the receiver is trained as usual, but its
+      gradient does not pass through the channel. The transmitter perturbs its own symbols,
+      receives one scalar loss value per codeword, and updates the constellation from that
+      value [4]; the channel is sampled rather than differentiated.</p>
       <figure><img src="__IMG_RL__" alt="Left: three bit error rate curves on AWGN; the reinforcement-learned system lies between the gradient-trained one and classical 64-QAM. Right: the two learned constellations with a line joining the two positions of each symbol, which nearly coincide."></figure>
       <ul style="margin-top:3.4mm">
-        <li>Training without the channel model costs
-        <span class="r">0.12, 0.15 and 0.12 dB</span> at BER 1e-2 to 1e-4.</li>
-        <li>Even so, it stays <span class="r">0.24 dB</span> ahead of classical 64-QAM.</li>
-        <li>The two methods place each symbol in almost the same position, so reinforcement
-        learning arrives at much the same solution as the gradient method.</li>
+        <li>Removing the channel model costs <span class="r">0.12, 0.15 and 0.12 dB</span> at BER
+        1e-2, 1e-3 and 1e-4.</li>
+        <li>The reinforcement-learned system is still <span class="r">0.24 dB</span> better than
+        classical 64-QAM.</li>
+        <li>The two training methods place each symbol at almost the same position, so
+        reinforcement learning converges to a similar constellation.</li>
       </ul>
     </div>
   </div>
@@ -76,11 +76,11 @@
   <div class="card">
     <h2>Conclusion</h2>
     <div class="in">
-      <p>The gain from end-to-end learning is real but small on AWGN, and we could measure none at
-      all once the channel fades and CSI is estimated. Accuracy alone is therefore a weak argument
-      for an AI-native transceiver. The stronger one is that the design
-      <span class="r">needs no channel model</span>, and we can now say what that costs:
-      <b>0.12 to 0.15 dB</b>.</p>
+      <p>On AWGN, end-to-end learning gives a small but repeatable gain of <b>0.37 dB</b>. Under
+      Rayleigh fading with estimated CSI, we measured no gain. The main argument for an AI-native
+      transceiver is therefore not accuracy, but that it can be trained
+      <span class="r">without a channel model</span>, and our measurements put the cost of doing so
+      at <b>0.12 to 0.15 dB</b>.</p>
     </div>
   </div>
 
@@ -88,13 +88,14 @@
     <h2>Next Steps</h2>
     <div class="in">
       <ul>
-        <li><b>Meta-learning for fast adaptation.</b> The section above shows the receiver fails on
-        a shift in its input distribution, not on a harder channel, so adaptation is a
-        distribution-shift problem, which is what meta-learning [3] is for.</li>
-        <li><b>OFDM and multipath.</b> A frequency-selective channel is where a convolutional
-        demapper might finally earn its extra parameters.</li>
-        <li><b>MMSE equalisation</b> instead of zero-forcing, which bounds the effective noise and
-        so attacks the cause found above.</li>
+        <li><b>Deploy on real hardware.</b> Embed the trained transceiver in a real device, such
+        as a software-defined radio, and check whether the gain survives outside simulation.</li>
+        <li><b>Meta-learning for fast adaptation</b> [3]. The section above shows that the receiver
+        fails when its input distribution changes, so adaptation is the problem to solve.</li>
+        <li><b>Extend to OFDM and multipath</b> [2], where a convolutional demapper can use the
+        correlation between neighbouring subcarriers.</li>
+        <li><b>Replace zero-forcing with MMSE equalisation</b>, which keeps the effective noise
+        bounded.</li>
       </ul>
       <p style="font-size:15.5pt;line-height:1.3;margin-top:3.4mm;color:#3d4a57">Points resting on
       fewer than 30 block errors are dropped rather than drawn. Seeds are fixed, and every number
