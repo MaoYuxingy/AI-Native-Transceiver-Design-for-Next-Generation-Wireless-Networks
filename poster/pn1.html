@@ -32,19 +32,21 @@ html,body{width:594mm;height:841mm;background:#fff;color:var(--ink);
 /* ---------- body grid ---------- */
 .body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12mm;
   padding:5mm 16mm 0;align-content:start;counter-reset:card}
-.col{display:flex;flex-direction:column;gap:5mm}
+.col{display:flex;flex-direction:column;gap:4.4mm}
 
 /* ---------- card ---------- */
 .card{border:1.1mm solid var(--navy);border-radius:3mm;overflow:hidden;background:#fff;
   display:flex;flex-direction:column}
 .card > h2{background:var(--navy);color:#fff;font-size:27pt;font-weight:400;
-  padding:2.3mm 5.5mm 2.5mm;line-height:1.1}
+  padding:2.1mm 5.5mm 2.3mm;line-height:1.1}
 /* Left column numbers 1-4, right column 5-8, following DOM order. */
 .card > h2::before{counter-increment:card;content:counter(card);
   color:var(--bar);font-weight:700;margin-right:3.4mm}
 .card .in{padding:3.2mm 5.2mm 3.2mm;font-size:19pt;line-height:1.31}
 .card p{margin-bottom:2.9mm}
 .card p:last-child{margin-bottom:0}
+.card .in h4{font-size:20pt;font-weight:700;color:var(--navy);margin-bottom:2mm}
+.card .in h4 + ul{margin-bottom:3mm}
 .card ul{list-style:none;margin-bottom:3.2mm}
 .card ul:last-child{margin-bottom:0}
 .card li{position:relative;padding-left:6mm;margin-bottom:2.2mm}
@@ -81,5 +83,5 @@ tr.best td{font-weight:700}
 .refs .reflist div{padding-left:7mm;text-indent:-7mm;margin-bottom:1.7mm;break-inside:avoid}
 .refs .reflist div:last-child{margin-bottom:0}
 .refs .lbl{color:var(--ink);font-weight:700}
-.foot{height:5mm;background:linear-gradient(90deg,var(--navy) 0%,var(--bar) 100%)}
+.foot{height:3.5mm;background:linear-gradient(90deg,var(--navy) 0%,var(--bar) 100%)}
 </style>

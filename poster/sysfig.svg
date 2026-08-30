@@ -38,6 +38,6 @@
 
     <line x1="2.5" y1="96" x2="252.5" y2="96" stroke="#1F3B63" stroke-width="0.7"/>
     <text x="2.5" y="110" font-size="6.6" fill="#2B2A27" text-anchor="start">Channel:</text>
-    <text x="34" y="110" font-size="6.6" fill="#2B2A27" text-anchor="start">AWGN &#160;&#160;|&#160;&#160; Rayleigh block fading, L = 25, P pilot symbols, LS estimate</text>
+    <text x="34" y="110" font-size="6.6" fill="#2B2A27" text-anchor="start">AWGN &#160;or&#160; Rayleigh block fading, L = 25, P pilot symbols, LS estimate</text>
   </g>
 </svg>

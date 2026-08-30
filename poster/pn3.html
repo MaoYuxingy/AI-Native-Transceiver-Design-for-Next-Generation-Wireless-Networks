@@ -5,8 +5,8 @@
     <div class="in">
       <table>
         <caption><b>Table 1</b> &mdash; E<sub>b</sub>/N<sub>0</sub> needed for a given bit error rate
-        (dB, lower is better). 64,000 codewords per point; every entry rests on at least 30 block
-        errors.</caption>
+        (dB, lower is better). 64,000 codewords per point. Each estimate is based on at least 30
+        observed block errors.</caption>
         <thead>
           <tr><th>System</th><th>1e-2</th><th>1e-3</th><th>1e-4</th></tr>
         </thead>
@@ -19,13 +19,13 @@
         </tbody>
       </table>
       <ul style="margin-top:3.4mm">
-        <li>Fading costs <span class="r">5.9 to 8.8 dB</span>, depending on the target error rate,
-        while the choice of receiver changes the result by less than <b>0.4 dB</b>.</li>
-        <li>On AWGN the learned system gains <span class="r">0.37, 0.39 and 0.35 dB</span> at BER
+        <li>Rayleigh fading requires <span class="r">5.9 to 8.8 dB</span> more than AWGN, while
+        the choice of receiver changes the result by less than <b>0.4 dB</b>.</li>
+        <li>On AWGN the learned system gains <span class="r">0.37, 0.39 and 0.36 dB</span> at BER
         1e-2, 1e-3 and 1e-4. APP demapping is already optimal here, so the gain comes from
         <b>constellation shaping</b>.</li>
-        <li>Leaving the (1+1/P) factor out of the effective noise understates it by
-        <span class="r">1.76 dB</span> at P = 2.</li>
+        <li>With only two pilot symbols per block, leaving the channel-estimation term out of
+        the effective noise understates it by <span class="r">1.76 dB</span>.</li>
         <li>Under Rayleigh fading with estimated CSI we measured <span class="r">no gain</span>
         (+0.01, +0.11 and &minus;0.15 dB). The value at 1e-4 changed sign between two runs, so we
         treat it as noise.</li>
@@ -34,10 +34,10 @@
   </div>
 
   <div class="card">
-    <h2>Why AWGN Weights Fail on Fading</h2>
+    <h2>Why AWGN-Trained Weights Fail on Fading</h2>
     <div class="in">
       <p>When the AWGN weights are used on a fading channel without retraining, the BER increases
-      as the SNR increases. A real system cannot behave this way, so we kept every weight fixed and
+      as the SNR increases. A real system should not behave this way, so we kept every weight fixed and
       changed one thing at a time:</p>
       <ul>
         <li>Clamping the network outputs changed the BER by less than 4%, and the curve still
@@ -46,27 +46,27 @@
         <li>Clamping the noise value passed to the demapper into the range it saw during training
         <span class="r">restored a decreasing curve</span>, without changing any weight.</li>
       </ul>
-      <p style="margin-top:3mm">The cause is on the input side: at 18 dB,
-      <span class="r">89%</span> of symbols have an effective noise below anything the network saw
-      in training, and only 4.6% are in deep fades. Retraining on the fading channel gives BER
-      <span class="n">1e-3</span> at 13.2 dB and <span class="n">1e-4</span> at 14.9 dB.</p>
+      <p style="margin-top:3mm">The cause is on the input side: at 18 dB, <span class="r">89%</span>
+      of symbols have an effective noise below anything the network saw in training, and only 4.6%
+      are in deep fades. Retraining gives BER <span class="n">1e-3</span> at 13.2 dB and
+      <span class="n">1e-4</span> at 14.9 dB.</p>
     </div>
   </div>
 
   <div class="card">
-    <h2>Learning Without a Channel Model</h2>
+    <h2>Training Without a Channel Model</h2>
     <div class="in">
       <p>All the results above were obtained by backpropagating through a differentiable channel
       model, which a deployed system does not have. Here the receiver is trained as usual, but its
-      gradient does not pass through the channel. The transmitter perturbs its own symbols,
-      receives one scalar loss value per codeword, and updates the constellation from that
-      value [4]; the channel is sampled rather than differentiated.</p>
+      gradient does not reach the channel. The transmitter perturbs its own symbols, receives one
+      scalar loss value per codeword, and updates the constellation from that value [4]; the
+      channel is sampled rather than differentiated.</p>
       <figure><img src="__IMG_RL__" alt="Left: three bit error rate curves on AWGN; the reinforcement-learned system lies between the gradient-trained one and classical 64-QAM. Right: the two learned constellations with a line joining the two positions of each symbol, which nearly coincide."></figure>
       <ul style="margin-top:3.4mm">
-        <li>Removing the channel model costs <span class="r">0.12, 0.15 and 0.12 dB</span> at BER
+        <li>Removing the channel model costs <span class="r">0.12, 0.14 and 0.13 dB</span> at BER
         1e-2, 1e-3 and 1e-4.</li>
-        <li>The reinforcement-learned system is still <span class="r">0.24 dB</span> better than
-        classical 64-QAM.</li>
+        <li>The reinforcement-learned system is still <span class="r">0.23 to 0.25 dB</span> better
+        than classical 64-QAM.</li>
         <li>The two training methods place each symbol at almost the same position, so
         reinforcement learning converges to a similar constellation.</li>
       </ul>
@@ -80,7 +80,7 @@
       Rayleigh fading with estimated CSI, we measured no gain. The main argument for an AI-native
       transceiver is therefore not accuracy, but that it can be trained
       <span class="r">without a channel model</span>, and our measurements put the cost of doing so
-      at <b>0.12 to 0.15 dB</b>.</p>
+      at <b>0.12 to 0.14 dB</b>.</p>
     </div>
   </div>
 
@@ -97,10 +97,9 @@
         <li><b>Replace zero-forcing with MMSE equalisation</b>, which keeps the effective noise
         bounded.</li>
       </ul>
-      <p style="font-size:15.5pt;line-height:1.3;margin-top:3.4mm;color:#3d4a57">Points resting on
-      fewer than 30 block errors are dropped rather than drawn. Seeds are fixed, and every number
-      is measured in the accompanying notebook. Sionna [5] and PyTorch. <b>Scope:</b> flat block
-      fading only, with no multipath, Doppler or OFDM.</p>
+      <p style="font-size:15.5pt;line-height:1.3;margin-top:3.4mm;color:#3d4a57">Seeds are fixed,
+      and every number is measured in the accompanying notebook. Sionna [5] and PyTorch.
+      <b>Scope:</b> flat block fading only, with no multipath, Doppler or OFDM.</p>
     </div>
   </div>
 

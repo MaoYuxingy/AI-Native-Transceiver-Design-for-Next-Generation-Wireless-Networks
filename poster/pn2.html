@@ -27,12 +27,12 @@
       offers two alternatives: train transmitter and receiver together as an
       <b>autoencoder</b> [1], or replace channel estimation and detection with a
       <b>learned receiver</b> [2].</p>
-      <p>We ask two questions:</p>
+      <p><b>Research questions:</b></p>
       <ul>
-        <li>How much is end-to-end learning worth compared with a classical receiver that is
-        already <span class="r">doing its best</span>?</li>
-        <li>Can the transmitter be trained at all when <span class="r">no differentiable model of
-        the channel</span> is available?</li>
+        <li>How much performance gain does end-to-end learning offer over a
+        <span class="r">well-optimised classical receiver</span>?</li>
+        <li>Can the transmitter be trained <span class="r">without a differentiable channel
+        model</span>?</li>
       </ul>
     </div>
   </div>
@@ -40,20 +40,21 @@
   <div class="card">
     <h2>Objectives and Contributions</h2>
     <div class="in">
+      <h4>Objectives</h4>
       <ul>
-        <li>Measure the gain of a learned transceiver against a <b>matched</b> classical baseline,
-        on AWGN and on Rayleigh block fading with <b>pilot-estimated CSI</b>.</li>
-        <li>Train the transmitter with <b>no channel model</b>, using reinforcement learning instead
-        of backpropagation through the channel, and measure the cost.</li>
-        <li>Account for the pilot overhead and the channel estimation error. Let
-        <span class="n">R</span> be the code rate, <span class="n">L</span> the number of symbols in
-        one fading block, <span class="n">P</span> the number of pilot symbols in that block,
-        <span class="n">N<sub>0</sub></span> the noise power spectral density and
-        <span class="n"><i>h&#770;</i></span> the estimated channel coefficient. The effective code
-        rate is then <span class="n">R(L&minus;P)/L</span>, and after zero-forcing the effective
-        noise is <span class="n">N<sub>0</sub>(1+1/P)/|<i>h&#770;</i>|&sup2;</span>.</li>
-        <li>Identify the cause of each failure by experiment: keep the weights fixed, change one
-        thing at a time, and see which change removes the symptom.</li>
+        <li>Compare an end-to-end learned transceiver with a <b>matched</b> classical system over
+        AWGN and Rayleigh block-fading channels with <b>pilot-estimated CSI</b>.</li>
+        <li>Evaluate transmitter training by reinforcement learning when
+        <span class="r">no differentiable channel model</span> is available.</li>
+      </ul>
+      <h4>Contributions</h4>
+      <ul>
+        <li>Develop a fair evaluation that includes <b>pilot overhead</b> and
+        <b>channel-estimation error</b>.</li>
+        <li>Show that reinforcement learning can train the transmitter with only a small
+        performance penalty compared with gradient-based training.</li>
+        <li>Show that learning provides a small improvement over 64-QAM on AWGN, mainly through
+        constellation shaping, but <b>no consistent improvement</b> under Rayleigh fading.</li>
       </ul>
     </div>
   </div>
@@ -65,6 +66,13 @@
       <p style="margin-top:3.4mm">The two systems differ only in the shaded blocks. They share the
       rate-1/2 5G LDPC code, the channel model and the random seeds, so any difference in bit error
       rate comes from the mapper and the demapper.</p>
+      <p>Let <span class="n">R</span> be the code rate, <span class="n">L</span> the number of
+      symbols in one fading block, <span class="n">P</span> the number of pilot symbols in that
+      block, <span class="n">N<sub>0</sub></span> the noise power spectral density and
+      <span class="n"><i>h&#770;</i></span> the channel coefficient estimated from the pilots. Both
+      systems are charged the same way: the effective code rate is
+      <span class="n">R(L&minus;P)/L</span>, and after zero-forcing the effective noise is
+      <span class="n">N<sub>0</sub>(1+1/P)/|<i>h&#770;</i>|&sup2;</span>.</p>
     </div>
   </div>
 
