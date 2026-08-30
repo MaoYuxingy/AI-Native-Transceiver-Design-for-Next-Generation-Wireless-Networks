@@ -22,8 +22,8 @@
     <h2>Background and Motivation</h2>
     <div class="in">
       <p>In a <b>conventional transceiver design</b>, coding, modulation, channel estimation and
-      detection are designed as separate blocks. Each block is optimal for the job it is given, but
-      the receiver as a whole is only as good as the assumptions that connect them. Deep learning
+      detection are designed as separate blocks. Each block is optimal for its own task. The
+      complete receiver is limited by the assumptions that link them. Deep learning
       offers two alternatives: train transmitter and receiver together as an
       <b>autoencoder</b> [1], or replace channel estimation and detection with a
       <b>learned receiver</b> [2].</p>
@@ -81,9 +81,9 @@
     <div class="in">
       <figure><img src="__IMG_AWGN__" alt="Left: bit error rate against Eb/N0 on AWGN; the learned system sits 0.39 dB left of classical 64-QAM at BER 1e-3. Right: the 64-QAM lattice with an arrow from each point to its learned position."></figure>
       <p style="margin-top:3.4mm">Under AWGN, APP demapping is already optimal, so the improvement
-      cannot come from the receiver. It comes from the transmitter: the learned constellation moves
-      away from the regular 64-QAM lattice and gives more power to the symbols that the demapper
-      confuses most often.</p>
+      cannot come from the receiver. It comes from the transmitter. The learned constellation
+      moves away from the regular 64-QAM lattice and gives more power to the symbols that are most
+      often confused.</p>
     </div>
   </div>
 
