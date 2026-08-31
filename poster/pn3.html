@@ -27,8 +27,8 @@
         <li>With only two pilot symbols per block, leaving the channel-estimation term out of
         the effective noise understates it by <span class="r">1.76 dB</span>.</li>
         <li>Under Rayleigh with estimated CSI the learned system is ahead by
-        <span class="r">0.01 and 0.11 dB</span> at 1e-2 and 1e-3 and behind by 0.15 dB at 1e-4,
-        a spread within the run-to-run scatter.</li>
+        <span class="r">0.01 and 0.11 dB</span> at 1e-2 and 1e-3, and behind by 0.15 dB at
+        1e-4. The spread is within the run-to-run scatter.</li>
       </ul>
     </div>
   </div>
@@ -48,7 +48,7 @@
       </ul>
       <p style="margin-top:3mm">The cause is on the input side. At 18 dB,
       <span class="r">89%</span> of symbols have an effective noise below anything seen in
-      training, against 4.6% in deep fades. Retraining gives <span class="n">1e-3</span> at
+      training, against 4.6% in deep fades. Retraining gives BER <span class="n">1e-3</span> at
       13.2 dB and <span class="n">1e-4</span> at 14.9 dB.</p>
     </div>
   </div>
@@ -60,9 +60,9 @@
       may not be feasible in practice, where the channel acts as a black box and only its inputs
       and outputs can be observed. There is then <b>no channel layer</b> connecting the two neural
       networks at the transmitter and the receiver, because the channel is not differentiable.</p>
-      <p>Instead we feed the training loss from the receiver back to the transmitter and use it
-      to train the transmitter by <b>reinforcement learning</b> [4]. The two networks are still
-      jointly optimised, without requiring a channel model.</p>
+      <p>Instead we feed the training loss from the receiver back to the transmitter, which is
+      then trained by <b>reinforcement learning</b> [4]. The two networks are still jointly
+      optimised, without requiring a channel model.</p>
       <figure><img src="__IMG_RL__" alt="Left: three bit error rate curves on AWGN; the reinforcement-learned system lies between the gradient-trained one and classical 64-QAM. Right: the two learned constellations with a line joining the two positions of each symbol, which nearly coincide."></figure>
       <ul style="margin-top:3.4mm">
         <li>Removing the channel model costs <span class="r">0.12, 0.14 and 0.13 dB</span> at BER
@@ -79,7 +79,8 @@
     <h2>Conclusion</h2>
     <div class="in">
       <p>On AWGN, end-to-end learning gives a gain of <b>0.37 dB</b>. Under Rayleigh fading with
-      estimated CSI the gain is small: 0.01 and 0.11 dB at 1e-2 and 1e-3. The end-to-end system can
+      estimated CSI the gain is small: 0.01 and 0.11 dB at 1e-2 and 1e-3, and &minus;0.15 dB at
+      1e-4. The end-to-end system can
       also be trained <span class="r">with no channel model</span>, at a cost of
       <b>0.12 to 0.14 dB</b>.</p>
     </div>
@@ -97,8 +98,8 @@
         correlation between neighbouring subcarriers.</li>
         <li><b>Replace zero-forcing with MMSE equalisation</b>, which keeps the effective noise
         bounded.</li>
-        <li><b>Improve performance under fading.</b> We will continue to improve the proposed
-        system on Rayleigh and other realistic channel models.</li>
+        <li><b>Better performance under fading.</b> We will continue to develop the system on
+        Rayleigh and other realistic channel models.</li>
       </ul>
     </div>
   </div>
