@@ -1,0 +1,16 @@
+Hi, I'm Yuxing Mao, and this is Haikun Xu. Our project is AI-Native Transceiver Design, supervised by Doctor Huynh Nguyen. We use deep learning to redesign a wireless transceiver.
+A conventional transceiver is built from separate blocks: coding, modulation, channel estimation, detection. Each block is optimal for its own task, but not for the system as a whole, so the end-to-end performance is limited.
+Instead, we replace those blocks with neural networks, trained together as one autoencoder.
+That gives us two questions. How much is learning actually worth? And can the system train with no channel model at all?
+The theme here is fairness.
+We built two systems, in Sionna and PyTorch. One has a trainable constellation and a neural demapper. The other is classical: sixty-four QAM, Gray labelling, and a posteriori probability demapping. Both share the same LDPC code, the same channel, and the same random seeds, and both are evaluated on the same terms. So any difference in bit error rate comes only from the mapper and the demapper.
+Being fair has a cost, and we pay it twice.
+First, pilots are not free. They take up symbol slots, so the effective code rate drops to R times L minus P, over L.
+Second, the channel estimate is not exact. When we equalise with an estimate, the error gets amplified. We put that into the effective noise, as a factor of one plus one over P. With only two pilots, that factor is worth one point seven six dB. And this is a term we added ourselves. Before we added it, we were understating our own noise.
+On measurement. Every point is sixty-four thousand codewords. We throw away any point with fewer than thirty block errors, because the relative standard error there is over eighteen percent, and noise like that gets read as structure.
+My skill is research rigour. Specifically, checking the thing that might go against you.
+Halfway through the project, we realised our effective noise model was missing a term. It was the one plus one over P I mentioned earlier. We added it, and our own numbers got worse.
+It also reversed a conclusion. Two pilots had looked like the best choice. Once the estimation error was counted properly, two pilots became the worst. The saving in overhead was real, but we had not been paying for the extra estimation error.
+We changed it anyway, and we wrote a check that tests the model against tensors the simulator produces, rather than trusting it.
+Beyond LivSURF. In research, or in engineering, you will always get results that happen to favour you. What decides whether anyone can trust them is whether you are willing to test the thing that could embarrass you. That habit carries into a PhD, and into any job that touches data.
+What surprised me most: under fading, the gain is small. Zero point zero one and zero point one one dB, and the wrong way at ten to the minus four. But the real finding was somewhere else: training with no channel model at all costs only zero point one two to zero point one four dB. A small difference, measured cleanly, is worth as much as a big one.
