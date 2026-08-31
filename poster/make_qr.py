@@ -10,11 +10,16 @@ inverted symbols, so the code keeps its own white tile and quiet zone.
 """
 import io
 import re
+import sys
 
 import segno
 
-URL = ('https://github.com/MaoYuxingy/'
-       'AI-Native-Transceiver-Design-for-Next-Generation-Wireless-Networks')
+# LivSURF requires the poster's QR to open the recorded presentation. Pass the
+# video link as an argument; with no argument it falls back to the repository, which
+# is what the code pointed at before the submission requirement was known.
+REPO = ('https://github.com/MaoYuxingy/'
+        'AI-Native-Transceiver-Design-for-Next-Generation-Wireless-Networks')
+URL = sys.argv[1] if len(sys.argv) > 1 else REPO
 
 qr = segno.make(URL, error='m')
 buf = io.BytesIO()
@@ -29,5 +34,6 @@ svg = svg.replace(m.group(0),
 io.open('qr_repo.svg', 'w', encoding='utf-8', newline='\n').write(svg)
 
 across = qr.symbol_size(scale=1, border=2)[0]
+print('encodes %s' % URL)
 print('version %s-%s, %d modules across including the quiet zone' % (qr.version, qr.error.upper(), across))
 print('printed 34 mm wide that is %.2f mm per module' % (34.0 / across))

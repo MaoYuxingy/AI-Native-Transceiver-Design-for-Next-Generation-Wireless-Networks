@@ -236,7 +236,7 @@ s.notes_slide.notes_text_frame.text = 'B, 2:00-2:30.'
 
 # ------------------------------------------------------- 5. both channels
 s = slide()
-title(s, 'Under fading, the gain disappears')
+title(s, 'Under fading, the gain is small')
 rows = [('System', '1e-2', '1e-3', '1e-4'),
         ('AWGN, classical 64-QAM + APP', '5.67', '6.17', '6.54'),
         ('AWGN, learned (channel gradient)', '5.30', '5.78', '6.18'),
