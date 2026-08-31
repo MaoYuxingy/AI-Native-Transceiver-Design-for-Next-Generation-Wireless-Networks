@@ -102,14 +102,18 @@ def picture(s, name, y, height):
     s.shapes.add_picture(path, Emu(int((W - w) / 2)), y, width=w, height=height)
 
 
-def block(s, x, y, w, n, head, body, colour):
-    """Numbered step: big numeral, heading, description."""
+def block(s, x, y, w, n, head, body, colour, tall=False):
+    """Numbered step: big numeral, heading, description.
+
+    `tall` leaves room for a heading that wraps to two lines; without it the
+    description is placed at a fixed offset and collides with the second line.
+    """
     text(s, x, y, Inches(0.7), Inches(0.7), n, size=34, bold=True, font=HEAD,
          color=colour, space=0)
-    text(s, x + Inches(0.75), y + Inches(0.05), w - Inches(0.75), Inches(0.4),
+    text(s, x + Inches(0.75), y + Inches(0.05), w - Inches(0.75), Inches(0.8),
          head, size=17, bold=True, color=INK, space=3)
-    text(s, x + Inches(0.75), y + Inches(0.52), w - Inches(0.75), Inches(1.2),
-         body, size=13.5, color=SOFT, space=0, line=1.25)
+    text(s, x + Inches(0.75), y + Inches(0.92 if tall else 0.52), w - Inches(0.75),
+         Inches(1.2), body, size=13.5, color=SOFT, space=0, line=1.25)
 
 
 # ----------------------------------------------------------------- 1. title
@@ -133,19 +137,20 @@ s.notes_slide.notes_text_frame.text = (
 s = slide()
 title(s, 'The problem, and what we asked')
 text(s, M, Inches(1.6), Inches(6.0), Inches(2.2),
-     [[('A transceiver is built as separate blocks: coding, modulation, channel '
-        'estimation, detection.', False, INK)],
-      [('Each block is optimal on its own. The complete receiver is limited by the '
-        'assumptions that link them.', False, INK)],
-      [('Deep learning proposes training them together. Two objections are usually '
-        'raised.', False, INK)]],
+     [[('A conventional transceiver design treats coding, modulation, channel '
+        'estimation and detection as separate blocks.', False, INK)],
+      [('Each block is optimal for its own task, but not for the system as a whole. '
+        'Consequently, the end-to-end performance is limited.', False, INK)],
+      [('Instead, the transmitter and receiver blocks can be replaced by deep neural '
+        'networks, jointly optimised as an autoencoder.', False, INK)]],
      size=16, space=10, line=1.3)
-c1 = card(s, M, Inches(4.15), Inches(6.0), Inches(1.0))
-text(s, M + Inches(0.3), Inches(4.35), Inches(5.4), Inches(0.7),
-     'Training needs a differentiable channel model. A real channel is a black box.',
+c1 = card(s, M, Inches(4.35), Inches(6.0), Inches(1.05))
+text(s, M + Inches(0.3), Inches(4.57), Inches(5.4), Inches(0.7),
+     'Training needs a differentiable channel model. In practice the channel is a '
+     'black box: only its inputs and outputs can be observed.',
      size=14, color=INK, line=1.25)
-c2 = card(s, M, Inches(5.35), Inches(6.0), Inches(1.0))
-text(s, M + Inches(0.3), Inches(5.55), Inches(5.4), Inches(0.7),
+c2 = card(s, M, Inches(5.6), Inches(6.0), Inches(1.05))
+text(s, M + Inches(0.3), Inches(5.82), Inches(5.4), Inches(0.7),
      'Gains are usually shown on AWGN, where the classical receiver is already optimal.',
      size=14, color=INK, line=1.25)
 text(s, Inches(7.4), Inches(1.6), Inches(5.2), Inches(0.5), 'Research questions',
@@ -154,8 +159,8 @@ block(s, Inches(7.4), Inches(2.3), Inches(5.2), '1',
       'How much is learning worth?',
       'Measured against a classical receiver that is already doing its best.', NAVY)
 block(s, Inches(7.4), Inches(4.1), Inches(5.2), '2',
-      'Can it train with no channel model?',
-      'The transmitter never differentiates the channel, only samples it.', OCHRE)
+      'Can the end-to-end system train with no channel model?',
+      'The channel is sampled, never differentiated.', OCHRE, tall=True)
 s.notes_slide.notes_text_frame.text = (
     'A, 0:10-0:40. The two objections lead to the two questions. Do not read the '
     'cards out; say them in your own words.')
@@ -195,7 +200,8 @@ for i, (lbl, shaded) in enumerate(boxes):
         con.line.fill.background()
         con.shadow.inherit = False
 text(s, M, Inches(3.0), W - 2 * M, Inches(0.4),
-     'Only the two shaded blocks differ. Same LDPC code, same channel, same random seeds.',
+     'Only the two shaded blocks differ. Same LDPC code, same channel, same random '
+     'seeds, and both systems evaluated on the same terms.',
      size=14, color=SOFT)
 text(s, M, Inches(3.9), Inches(5.9), Inches(0.5), 'Pilots are not free',
      size=19, bold=True, font=HEAD, color=NAVY, space=8)
@@ -218,8 +224,8 @@ s = slide()
 title(s, 'On AWGN, learning wins, and the transmitter is why')
 picture(s, 'awgn_ae_vs_qam_poster.png', Inches(1.65), Inches(3.25))
 text(s, M, Inches(5.35), Inches(5.8), Inches(1.6),
-     [[('APP demapping is already optimal here, so the receiver cannot be the source '
-        'of the gain.', False, INK)],
+     [[('A posteriori probability (APP) demapping is already optimal here, so the '
+        'receiver cannot be the source of the gain.', False, INK)],
       [('It comes from the transmitter. The learned constellation leaves the regular '
         'lattice and spends more power on the symbols that are most often confused.',
         False, INK)]],
@@ -266,8 +272,8 @@ stat(s, Inches(9.0), Inches(1.75), '5.9 to 8.8 dB', 'the cost of fading', OCHRE,
 stat(s, Inches(9.0), Inches(3.35), 'under 0.4 dB', 'what changing the receiver is worth',
      NAVY, vsize=34, w=Inches(3.8))
 text(s, Inches(9.0), Inches(4.95), Inches(3.8), Inches(1.8),
-     'Under Rayleigh with estimated CSI we measured no gain. The value at 1e-4 changed '
-     'sign between two runs, so we treat it as noise.',
+     'Under Rayleigh with estimated CSI there is a small gain at 1e-2 and 1e-3, of '
+     '0.01 and 0.11 dB, and a loss of 0.15 dB at 1e-4.',
      size=13.5, color=SOFT, line=1.3)
 s.notes_slide.notes_text_frame.text = (
     'B, 2:30-3:00. The point is the vertical gap between the AWGN block and the '
@@ -278,10 +284,11 @@ s = slide()
 title(s, 'Training with no channel model at all')
 picture(s, 'rl_vs_gradient_awgn.png', Inches(1.6), Inches(3.15))
 text(s, M, Inches(5.15), Inches(6.6), Inches(1.7),
-     [[('The receiver trains as usual, but its gradient never reaches the channel.',
-        False, INK)],
-      [('The transmitter perturbs its own symbols, receives one scalar loss value per '
-        'codeword, and updates from that. The channel is only sampled.', False, INK)]],
+     [[('There is no channel layer connecting the two neural networks, because the '
+        'channel is not differentiable.', False, INK)],
+      [('We feed the training loss from the receiver back to the transmitter, which '
+        'is then trained by reinforcement learning. The two networks are still '
+        'jointly optimised, without a channel model.', False, INK)]],
      size=15, space=8, line=1.3)
 stat(s, Inches(8.3), Inches(5.05), '0.12 to 0.14 dB',
      'what dropping the channel model costs', OCHRE, vsize=28, w=Inches(4.3))
@@ -345,9 +352,10 @@ s.notes_slide.notes_text_frame.text = 'B, 4:20-5:20. Same shape as slide 7.'
 s = slide(dark=True)
 title(s, 'What we take away', dark=True, size=36)
 text(s, M, Inches(1.9), Inches(5.7), Inches(2.6),
-     [[('The honest answer under fading was "no gain".', False, PAPER)],
-      [('That looks like a failed result, until you notice the interesting finding was '
-        'somewhere else entirely.', False, RGBColor(0xCA, 0xDC, 0xFC))]],
+     [[('Under fading the measured gain is small, and at 1e-4 it goes the other '
+        'way.', False, PAPER)],
+      [('That looks like a disappointing result, until you notice the interesting '
+        'finding was somewhere else entirely.', False, RGBColor(0xCA, 0xDC, 0xFC))]],
      size=18, space=12, line=1.3)
 card_bg = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(6.9), Inches(1.85),
                              Inches(5.7), Inches(3.5))
@@ -357,10 +365,10 @@ card_bg.line.fill.background()
 card_bg.shadow.inherit = False
 card_bg.adjustments[0] = 0.06
 text(s, Inches(7.3), Inches(2.25), Inches(4.9), Inches(2.8),
-     [[('A measurement that shows no gain is worth as much as one that shows a gain, '
+     [[('A measurement that shows little is worth as much as one that shows a lot, '
         'provided it is clean enough to trust.', False, PAPER)],
-      [('The case for an AI-native transceiver is not accuracy. It is that it needs no '
-        'channel model, and we can now say what that costs.', False,
+      [('The end-to-end system can be trained with no channel model, and we can now '
+        'say what that costs.', False,
         RGBColor(0xCA, 0xDC, 0xFC))]],
      size=16, space=14, line=1.35)
 text(s, M, Inches(5.9), Inches(11.8), Inches(0.6),
