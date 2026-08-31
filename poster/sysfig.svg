@@ -34,7 +34,7 @@
 
     <text x="2.5" y="87" font-size="7" font-weight="bold" fill="#57534B" text-anchor="start">Classical</text>
     <text x="75.7" y="87" font-size="7">64-QAM, Gray</text>
-    <text x="174.2" y="87" font-size="7">APP demapper</text>
+    <text x="174.2" y="87" font-size="6.2">a posteriori probability demapper</text>
 
     <line x1="2.5" y1="96" x2="252.5" y2="96" stroke="#1F3B63" stroke-width="0.7"/>
     <text x="2.5" y="110" font-size="6.6" fill="#2B2A27" text-anchor="start">Channel:</text>

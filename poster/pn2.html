@@ -22,17 +22,17 @@
     <h2>Background and Motivation</h2>
     <div class="in">
       <p>In a <b>conventional transceiver design</b>, coding, modulation, channel estimation and
-      detection are designed as separate blocks. Each block is optimal for its own task. The
-      complete receiver is limited by the assumptions that link them. Deep learning
-      offers two alternatives: train transmitter and receiver together as an
-      <b>autoencoder</b> [1], or replace channel estimation and detection with a
-      <b>learned receiver</b> [2].</p>
+      detection are designed as separate blocks. Each block is optimal for its own task.
+      Consequently, the end-to-end performance is limited. To address this practical
+      issue, the signal processing blocks at the transmitter and the receiver can be
+      replaced by deep neural networks which are jointly optimised as an
+      <b>autoencoder</b> [1].</p>
       <p><b>Research questions:</b></p>
       <ul>
         <li>How much performance gain does end-to-end learning offer over a
         <span class="r">well-optimised classical receiver</span>?</li>
-        <li>Can the transmitter be trained <span class="r">without a differentiable channel
-        model</span>?</li>
+        <li>Can the end-to-end system be trained <span class="r">without a differentiable
+        channel model</span>?</li>
       </ul>
     </div>
   </div>
@@ -53,8 +53,8 @@
         <b>channel-estimation error</b>.</li>
         <li>Show that reinforcement learning can train the transmitter with only a small
         performance penalty compared with gradient-based training.</li>
-        <li>Show that learning provides a small improvement over 64-QAM on AWGN, mainly through
-        constellation shaping, but <b>no consistent improvement</b> under Rayleigh fading.</li>
+        <li>Show that the proposed <b>end-to-end communication system</b> outperforms a
+        conventional channel estimation method.</li>
       </ul>
     </div>
   </div>
@@ -69,10 +69,13 @@
       <p>Let <span class="n">R</span> be the code rate, <span class="n">L</span> the number of
       symbols in one fading block, <span class="n">P</span> the number of pilot symbols in that
       block, <span class="n">N<sub>0</sub></span> the noise power spectral density and
-      <span class="n"><i>h&#770;</i></span> the channel coefficient estimated from the pilots. Both
-      systems are charged the same way: the effective code rate is
+      <span class="n"><i>h&#770;</i></span> the channel coefficient estimated from the pilots. The two
+      systems are designed in the same way. The effective code rate is
       <span class="n">R(L&minus;P)/L</span>, and after zero-forcing the effective noise is
       <span class="n">N<sub>0</sub>(1+1/P)/|<i>h&#770;</i>|&sup2;</span>.</p>
+      <p style="font-size:15.5pt;line-height:1.3;margin-top:3mm;color:#3d4a57">Seeds are fixed, and
+      every number is measured in the accompanying notebook. Built with Sionna [5] and PyTorch.
+      <b>Scope:</b> flat block fading only, with no multipath, Doppler or OFDM.</p>
     </div>
   </div>
 
@@ -80,7 +83,7 @@
     <h2>Where the AWGN Gain Comes From</h2>
     <div class="in">
       <figure><img src="__IMG_AWGN__" alt="Left: bit error rate against Eb/N0 on AWGN; the learned system sits 0.39 dB left of classical 64-QAM at BER 1e-3. Right: the 64-QAM lattice with an arrow from each point to its learned position."></figure>
-      <p style="margin-top:3.4mm">Under AWGN, APP demapping is already optimal, so the improvement
+      <p style="margin-top:3.4mm">Under AWGN, a posteriori probability (APP) demapping is already optimal, so the improvement
       cannot come from the receiver. It comes from the transmitter. The learned constellation
       moves away from the regular 64-QAM lattice and gives more power to the symbols that are most
       often confused.</p>
